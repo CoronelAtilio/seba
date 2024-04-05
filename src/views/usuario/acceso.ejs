@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', {estilo : "acceso.css" , titulo : "Acceso" }) %>
+
+  <body>
+    <%- include('../partials/header.ejs')%>
+
+      <main>
+
+        <div>
+          <form action="/usuario/acceso" method="post">
+            <h1>Cuenta</h1>
+
+            <div>
+              <label for="email">Email</label>
+              <input type="email" name="email" placeholder="asd@gmail.com">
+            </div>
+
+            <div>
+              <label for="password">Contraseña</label>
+              <input type="password" name="password" placeholder="Contraseña">
+            </div>
+
+            <div>
+              <input type="checkbox" name="recordarUsuario"> Recordar mi Usuario
+            </div>
+
+            <button type="submit" class="boton-registro">Ingresar</button>
+          </form>
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs')%>
+  </body>
+
+</html>
