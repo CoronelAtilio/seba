@@ -34,9 +34,9 @@ CREATE TABLE `alumnos` (
   `legajo` varchar(45) DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   `fk_idcurso_alumno` int DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `fk_idtutor_alumno` int DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idalumno`),
   UNIQUE KEY `dni_UNIQUE` (`dni`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -67,7 +67,7 @@ DROP TABLE IF EXISTS `cargos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cargos` (
   `idcargo` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`idcargo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -141,11 +141,12 @@ DROP TABLE IF EXISTS `notas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notas` (
   `idnota` int NOT NULL AUTO_INCREMENT,
+  `evaluativo` varchar(10) DEFAULT NULL,
   `fk_idmateria_nota` int DEFAULT NULL,
   `fk_idalumno_nota` int DEFAULT NULL,
   `fk_idprofesor_nota` int DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idnota`),
   KEY `fk_idmateria_nota_idx` (`fk_idmateria_nota`),
   KEY `fk_idalumno_nota_idx` (`fk_idalumno_nota`),
@@ -182,8 +183,8 @@ CREATE TABLE `profesores` (
   `legajo` varchar(45) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `fk_idcargo_profesor` int DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idprofesor`),
   UNIQUE KEY `dni_UNIQUE` (`dni`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -214,8 +215,8 @@ CREATE TABLE `profesores_alumnos` (
   `idprofesor_alumno` int NOT NULL AUTO_INCREMENT,
   `fk_idprofesor_profesoralumno` int DEFAULT NULL,
   `fk_idalumno_profesoralumno` int DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idprofesor_alumno`),
   KEY `fk_idprofesor_profesoralumno_idx` (`fk_idprofesor_profesoralumno`),
   KEY `fk_idalumno_profesoralumno_idx` (`fk_idalumno_profesoralumno`),
@@ -241,16 +242,16 @@ DROP TABLE IF EXISTS `profesores_cursos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `profesores_cursos` (
-  `idprofesor_alumno` int NOT NULL AUTO_INCREMENT,
-  `fk_profesor_profesorcurso` int DEFAULT NULL,
-  `fk_curso_profesorcurso` int DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idprofesor_alumno`),
-  KEY `fk_profesor_profesorcurso_idx` (`fk_profesor_profesorcurso`),
-  KEY `fk_curso_profesorcurso_idx` (`fk_curso_profesorcurso`),
-  CONSTRAINT `fk_curso_profesorcurso` FOREIGN KEY (`fk_curso_profesorcurso`) REFERENCES `cursos` (`idcurso`),
-  CONSTRAINT `fk_profesor_profesorcurso` FOREIGN KEY (`fk_profesor_profesorcurso`) REFERENCES `profesores` (`idprofesor`)
+  `idprofesor_curso` int NOT NULL AUTO_INCREMENT,
+  `fk_idprofesor_profesorcurso` int DEFAULT NULL,
+  `fk_idcurso_profesorcurso` int DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idprofesor_curso`),
+  KEY `fk_profesor_profesorcurso_idx` (`fk_idprofesor_profesorcurso`),
+  KEY `fk_curso_profesorcurso_idx` (`fk_idcurso_profesorcurso`),
+  CONSTRAINT `fk_curso_profesorcurso` FOREIGN KEY (`fk_idcurso_profesorcurso`) REFERENCES `cursos` (`idcurso`),
+  CONSTRAINT `fk_profesor_profesorcurso` FOREIGN KEY (`fk_idprofesor_profesorcurso`) REFERENCES `profesores` (`idprofesor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -274,6 +275,8 @@ CREATE TABLE `profesores_materias` (
   `idprofesor_materia` int NOT NULL AUTO_INCREMENT,
   `fk_idmateria_profesormateria` int DEFAULT NULL,
   `fk_idprofesor_profesormateria` int DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idprofesor_materia`),
   KEY `fk_idmateria_profesormateria_idx` (`fk_idmateria_profesormateria`),
   KEY `fk_idprofesor_profesormateria_idx` (`fk_idprofesor_profesormateria`),
@@ -306,8 +309,8 @@ CREATE TABLE `tutores` (
   `apellido` varchar(100) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idtutor`),
   UNIQUE KEY `dni_UNIQUE` (`dni`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -333,4 +336,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-09 10:46:00
+-- Dump completed on 2024-04-11 13:25:17
