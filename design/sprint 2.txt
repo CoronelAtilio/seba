@@ -1,0 +1,31 @@
+Tiempo restante: 58 dias a partir del 15
+sprints 2: tiempo requerido: 2 semanas(tiempo despues de eso: 44 dias)
+
+Modelo/David: normalizar las bases de datos, implementar con sequelize de nodejs para trabajar como objetos, desarrollar consultas que posteriormente seran realizadas al directivo de la institucion   acordes a la faltante de datos en la bbdd requeridos por la vista y el controlador
+
+Vista/Melany: implementacion del codigo en ejs y css para la representacion de los wireframes utilizando diferentes metodologias o recursos como: 
+Metodologias: flexbox, grid, bootstrap
+
+Recursos:
+
+-Tipografías
+https://fonts.google.com/
+
+-Paleta de colores
+ https://coolors.co/
+https://colorhunt.co/
+
+-Iconos
+https://www.flaticon.es/
+https://fontawesome.com/
+https://uxwing.com/
+
+- imágenes gratuitas
+https://unsplash.com/es
+
+- figma
+
+Controlador/Atilio:Levantar el servidor, subir proyecto en git, intermediar con los datos a tratar entre la vista y los modelos, implementar logica para las peticiones del cliente 
+
+Sistema de ruteo/Exequiel: modularizar el mvc, realizar la carpeta router que relacione vista, controlador y usar elementos como nativos o dependencias:
+path, module.exports, express.Router, entre otros

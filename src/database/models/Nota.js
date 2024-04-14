@@ -6,8 +6,12 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        evaluativo: {
-            type: DataTypes.STRING(10),
+        nota1: {
+            type: DataTypes.DECIMAL(10,2),
+            defaultValue : null
+        },
+        nota2: {
+            type: DataTypes.DECIMAL(10,2),
             defaultValue : null
         },
         fk_idmateria_nota :{

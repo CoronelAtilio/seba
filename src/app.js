@@ -16,6 +16,10 @@ const path = require("path");
 // const cookies = require('cookie-parser')
 // app.use(cookies())
 
+//VERIFICACION DE CONECCION SEQUELIZE
+const checkConnection = require('./database/config/checkConnection');
+checkConnection();
+
 /*LLAMADO AL EJS*/
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
