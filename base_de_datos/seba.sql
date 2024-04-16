@@ -59,6 +59,36 @@ LOCK TABLES `alumnos` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `alumnos_materias`
+--
+
+DROP TABLE IF EXISTS `alumnos_materias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `alumnos_materias` (
+  `idalumno_materia` int NOT NULL AUTO_INCREMENT,
+  `fk_idalumno_alumnomateria` int DEFAULT NULL,
+  `fk_idmateria_alumnomateria` int DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idalumno_materia`),
+  KEY `fk_idalumno_alumnomateria_idx` (`fk_idalumno_alumnomateria`),
+  KEY `fk_idmateria_alumnomateria_idx` (`fk_idmateria_alumnomateria`),
+  CONSTRAINT `fk_idalumno_alumnomateria` FOREIGN KEY (`fk_idalumno_alumnomateria`) REFERENCES `alumnos` (`idalumno`),
+  CONSTRAINT `fk_idmateria_alumnomateria` FOREIGN KEY (`fk_idmateria_alumnomateria`) REFERENCES `materias` (`idmateria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alumnos_materias`
+--
+
+LOCK TABLES `alumnos_materias` WRITE;
+/*!40000 ALTER TABLE `alumnos_materias` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alumnos_materias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cargos`
 --
 
@@ -92,7 +122,7 @@ CREATE TABLE `cursos` (
   `idcurso` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`idcurso`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,6 +131,7 @@ CREATE TABLE `cursos` (
 
 LOCK TABLES `cursos` WRITE;
 /*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
+INSERT INTO `cursos` VALUES (1,'Curso de Matemáticas'),(2,'Curso de Historia del Arte'),(3,'Curso de Programación en Python'),(4,'Curso de Marketing Digital'),(5,'Curso de Inglés Avanzado');
 /*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +172,8 @@ DROP TABLE IF EXISTS `notas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notas` (
   `idnota` int NOT NULL AUTO_INCREMENT,
-  `evaluativo` varchar(10) DEFAULT NULL,
+  `nota1` decimal(10,2) DEFAULT NULL,
+  `nota2` decimal(10,2) DEFAULT NULL,
   `fk_idmateria_nota` int DEFAULT NULL,
   `fk_idalumno_nota` int DEFAULT NULL,
   `fk_idprofesor_nota` int DEFAULT NULL,
@@ -336,4 +368,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-11 13:25:17
+-- Dump completed on 2024-04-16  0:49:23

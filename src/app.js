@@ -17,7 +17,7 @@ const path = require("path");
 // app.use(cookies())
 
 //VERIFICACION DE CONECCION SEQUELIZE
-const checkConnection = require('./database/config/checkConnection');
+const checkConnection = require(path.resolve(__dirname,'./database/config/checkConnection'));
 checkConnection();
 
 /*LLAMADO AL EJS*/
@@ -50,14 +50,14 @@ app.listen(port, () => {
 // app.use(userLoggedMiddleware)
 
 /*ROUTES*/
-const rutasIndex = require("./routes/main.routes");
-const rutasUsuarios = require("./routes/users.routes");
-const rutasAdmin = require("./routes/admin.routes");
+const rutasIndex = require(path.resolve(__dirname,"./routes/main.routes"));
+const rutasUsuarios = require(path.resolve(__dirname,"./routes/users.routes"));
+const rutasAdmin = require(path.resolve(__dirname,"./routes/admin.routes"));
 
 /*ENTRY POINTS*/
-app.use("/", rutasIndex);
 app.use("/usuario", rutasUsuarios);
 app.use("/admin", rutasAdmin);
+app.use("/", rutasIndex);
 
 
 /*RESPUESTA AL ERROR 404*/
