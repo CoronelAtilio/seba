@@ -50,9 +50,9 @@ app.listen(port, () => {
 // app.use(userLoggedMiddleware)
 
 /*ROUTES*/
-const rutasIndex = require(path.resolve(__dirname,"./routes/main.routes"));
 const rutasUsuarios = require(path.resolve(__dirname,"./routes/users.routes"));
 const rutasAdmin = require(path.resolve(__dirname,"./routes/admin.routes"));
+const rutasIndex = require(path.resolve(__dirname,"./routes/main.routes"));
 
 /*ENTRY POINTS*/
 app.use("/usuario", rutasUsuarios);

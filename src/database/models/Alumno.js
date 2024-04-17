@@ -11,35 +11,35 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.STRING(200),
-            defaultValue : null
+            defaultValue: null
         },
         celular: {
             type: DataTypes.STRING(15),
-            defaultValue : null
+            defaultValue: null
         },
         apellido: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            defaultValue: null
         },
         nombre: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            defaultValue: null
         },
         legajo: {
             type: DataTypes.STRING(45),
-            defaultValue : null
+            defaultValue: null
         },
         direccion: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            defaultValue: null
         },
-        fk_idcurso_alumno :{
+        fk_idcurso_alumno: {
             type: DataTypes.INTEGER,
-            defaultValue : null
+            defaultValue: null
         },
-        fk_idtutor_alumno :{
+        fk_idtutor_alumno: {
             type: DataTypes.INTEGER,
-            defaultValue : null
+            defaultValue: null
         },
         createdAt: {
             type: DataTypes.DATE,
@@ -56,27 +56,27 @@ module.exports = (sequelize, DataTypes) => {
     }
     const Alumno = sequelize.define(alias, cols, config)
 
-    Alumno.associate = function(models){
+    Alumno.associate = function (models) {
         Alumno.belongsTo(models.Curso, {
-            as : "Curso",
-            foreignKey : "fk_idcurso_alumno"
+            as: "Curso",
+            foreignKey: "fk_idcurso_alumno"
         })
-        
+
         Alumno.belongsTo(models.Tutor, {
-            as : "Tutor",
-            foreignKey : "fk_idtutor_alumno"
+            as: "Tutor",
+            foreignKey: "fk_idtutor_alumno"
         })
 
         Alumno.hasMany(models.Nota, {
-            as : "Nota",
-            foreignKey : "fk_idalumno_nota"
+            as: "Nota",
+            foreignKey: "fk_idalumno_nota"
         })
 
         Alumno.hasMany(models.Profesor_Alumno, {
-            as : "Profesor_Alumno",
-            foreignKey : "fk_idalumno_profesoralumno"
+            as: "Profesor_Alumno",
+            foreignKey: "fk_idalumno_profesoralumno"
         })
     }
 
     return Alumno
-    }
+}
