@@ -2,38 +2,39 @@ module.exports = (sequelize, DataTypes) => {
     let alias = "Profesor"
     let cols = {
         idprofesor: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
-        dni: {
-            type: DataTypes.STRING(15)
-        },
-        email: {
-            type: DataTypes.STRING(200)
-        },
-        celular: {
+        dni_profesor: {
             type: DataTypes.STRING(15),
-            defaultValue : null
+            allowNull: false,
+            unique: true
         },
-        apellido: {
+        email_profesor: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            defaultValue : null,
+            unique: true
         },
-        nombre: {
+        celular_profesor: {
+            type: DataTypes.STRING(15),
+            defaultValue : null,
+            unique: true
+        },
+        apellido_profesor: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            allowNull: false
         },
-        legajo: {
-            type: DataTypes.STRING(45),
-            defaultValue : null
-        },
-        password: {
+        nombre_profesor: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            allowNull: false
         },
         fk_idcargo_profesor :{
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue : null
+        },
+        fk_idsituacion_profesor :{
+            type: DataTypes.INTEGER.UNSIGNED,
             defaultValue : null
         },
         createdAt: {
@@ -55,6 +56,16 @@ module.exports = (sequelize, DataTypes) => {
         Profesor.belongsTo(models.Cargo, {
             as : "Cargo",
             foreignKey : "fk_idcargo_profesor"
+        })
+
+        Profesor.belongsTo(models.Situacion, {
+            as : "Situacion",
+            foreignKey : "fk_situacion_profesor"
+        })
+
+        Profesor.hasMany(models.Profesor_Materia, {
+            as : "Profesor_Materia",
+            foreignKey : "fk_idprofesor_profesormateria"
         })
     }
 

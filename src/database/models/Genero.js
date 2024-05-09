@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    let alias = "Curso"
+    let alias = "Genero"
     let cols = {
-        idcurso: {
+        idgenero: {
             type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true
@@ -12,17 +12,17 @@ module.exports = (sequelize, DataTypes) => {
         },
     }
     let config = {
-        tableName: "cursos",
+        tableName: "generos",
         timestamps: false
     }
-    const Curso = sequelize.define(alias, cols, config)
+    const Genero = sequelize.define(alias, cols, config)
 
-    Curso.associate = function(models){
-        Curso.hasMany(models.Materia, {
-            as : "Materia",
-            foreignKey : "fk_idcurso_materia"
+    Genero.associate = function(models){
+        Genero.hasMany(models.Alumno, {
+            as : "Alumno",
+            foreignKey : "fk_idgenero_alumno"
         })
     }
 
-    return Curso
+    return Genero
 }

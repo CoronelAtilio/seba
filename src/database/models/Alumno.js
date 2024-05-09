@@ -2,43 +2,47 @@ module.exports = (sequelize, DataTypes) => {
     let alias = "Alumno"
     let cols = {
         idalumno: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
-        dni: {
-            type: DataTypes.STRING(15)
-        },
-        email: {
-            type: DataTypes.STRING(200),
-            defaultValue: null
-        },
-        celular: {
+        dni_alumno: {
             type: DataTypes.STRING(15),
-            defaultValue: null
+            allowNull: false,
+            unique: true
         },
-        apellido: {
+        email_alumno: {
             type: DataTypes.STRING(100),
-            defaultValue: null
+            defaultValue: null,
+            unique: true
         },
-        nombre: {
+        celular_alumno: {
+            type: DataTypes.STRING(15),
+            defaultValue: null,
+            unique: true
+        },
+        apellido_alumno: {
             type: DataTypes.STRING(100),
-            defaultValue: null
+            allowNull: false
         },
-        legajo: {
-            type: DataTypes.STRING(45),
-            defaultValue: null
-        },
-        direccion: {
+        nombre_alumno: {
             type: DataTypes.STRING(100),
-            defaultValue: null
+            allowNull: false
         },
-        fk_idcurso_alumno: {
-            type: DataTypes.INTEGER,
-            defaultValue: null
+        direccion_alumno: {
+            type: DataTypes.STRING(100),
+            allowNull: false
+        },
+        fecha_nac: {
+            type: DataTypes.DATE,
+            allowNull: false
         },
         fk_idtutor_alumno: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: null
+        },
+        fk_idgenero_alumno: {
+            type: DataTypes.INTEGER.UNSIGNED,
             defaultValue: null
         },
         createdAt: {
@@ -57,9 +61,9 @@ module.exports = (sequelize, DataTypes) => {
     const Alumno = sequelize.define(alias, cols, config)
 
     Alumno.associate = function (models) {
-        Alumno.belongsTo(models.Curso, {
-            as: "Curso",
-            foreignKey: "fk_idcurso_alumno"
+        Alumno.belongsTo(models.Genero, {
+            as: "Genero",
+            foreignKey: "fk_idgenero_alumno"
         })
 
         Alumno.belongsTo(models.Tutor, {
@@ -72,9 +76,9 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "fk_idalumno_nota"
         })
 
-        Alumno.hasMany(models.Profesor_Alumno, {
-            as: "Profesor_Alumno",
-            foreignKey: "fk_idalumno_profesoralumno"
+        Alumno.hasMany(models.Alumno_Materia, {
+            as : "Alumno_Materia",
+            foreignKey : "fk_idalumno_alumnomateria"
         })
     }
 

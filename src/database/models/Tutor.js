@@ -2,32 +2,33 @@ module.exports = (sequelize, DataTypes) => {
     let alias = "Tutor"
     let cols = {
         idtutor: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
-        dni: {
-            type: DataTypes.STRING(15)
+        dni_tutor: {
+            type: DataTypes.STRING(15),
+            allowNull: false
         },
-        email: {
-            type: DataTypes.STRING(200),
+        email_tutor: {
+            type: DataTypes.STRING(100),
             defaultValue : null
         },
-        celular: {
+        celular_tutor: {
             type: DataTypes.STRING(15),
             defaultValue : null
         },
-        apellido: {
+        apellido_tutor: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            allowNull: false
         },
-        nombre: {
+        nombre_tutor: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            allowNull: false
         },
-        direccion: {
+        direccion_tutor: {
             type: DataTypes.STRING(100),
-            defaultValue : null
+            allowNull: false
         },
         createdAt: {
             type: DataTypes.DATE,

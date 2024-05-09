@@ -2,12 +2,13 @@ module.exports = (sequelize, DataTypes) => {
     let alias = "Cargo"
     let cols = {
         idcargo: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
-        nombre: {
-            type: DataTypes.STRING(45)
+        nombre_cargo: {
+            type: DataTypes.STRING(45),
+            allowNull: false
         },
     }
     let config = {
