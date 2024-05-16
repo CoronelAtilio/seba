@@ -9,6 +9,11 @@
             <!--Main-->
             <main>
                 <section>
+                    <% for( let index = 0; index < resultado.length; index++ ) { %>
+                        <%= resultado[index].nombre_alumno %>, <%= resultado[index].apellido_alumno %><br>
+                    <% } %>
+                </section>
+                <section>
                     <img class="imagen-fondo" src="/img/admin/fondo-menu.jpg" alt="fondo-menu">
                 </section>
             </main>

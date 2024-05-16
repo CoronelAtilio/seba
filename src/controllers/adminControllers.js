@@ -2,7 +2,10 @@ const db = require('../database/models')
 
 module.exports = {
     admin: (req, res) => {
-        res.render('admin/admin')
+        db.Alumno.findAll()
+        .then(resultado=>{
+            res.render('admin/admin', {resultado})
+        })
     },
     // buscar: async (req, res) => {
     //     try {
