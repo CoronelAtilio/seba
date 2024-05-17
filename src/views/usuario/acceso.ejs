@@ -6,47 +6,68 @@
     <%- include('../partials/header.ejs')%>
 
       <main>
-
-        <div style="width: 1280px; height: 1024px; position: relative">
-          <div style="width: 1280px; height: 80px; left: 0px; top: 0px; position: absolute; background: rgba(0, 157, 224, 0.67)">
-            <img style="width: 62px; height: 80px; left: 1154px; top: 0px; position: absolute" src="https://via.placeholder.com/62x80" />
-            <div style="padding-left: 40px; padding-right: 40px; left: 0px; top: 30px; position: absolute; justify-content: flex-start; align-items: flex-start; gap: 163px; display: inline-flex">
-              <div style="color: black; font-size: 15px; font-family: Roboto; font-weight: 600; word-wrap: break-word">SISTEMA EDUCATIVO DE BOLETINES ACADÉMICOS</div>
-            </div>
-            <div style="left: 801px; top: 30px; position: absolute; color: black; font-size: 15px; font-family: Roboto; font-weight: 600; word-wrap: break-word">COLEGIO SECUNDARIO “CAMPO CONTRERAS”</div>
-            <div style="padding-left: 40px; padding-right: 40px; left: 425px; top: 26px; position: absolute"></div>
-            <div style="left: 568px; top: 31px; position: absolute; color: black; font-size: 15px; font-family: Roboto; font-weight: 600; word-wrap: break-word">CICLO LECTIVO 2024</div>
-          </div>
-          <div style="left: 0px; top: 80px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
-            <img style="width: 1280px; height: 944px" src="https://via.placeholder.com/1280x944" />
-          </div>
-          <div style="width: 600px; height: 479px; left: 340px; top: 272px; position: absolute">
-            <div style="width: 600px; height: 479px; left: 0px; top: 0px; position: absolute; background: rgba(255, 255, 255, 0.80); border-radius: 58px; border: 3px #FFA503 solid"></div>
-            <div style="left: 231px; top: 38px; position: absolute; color: black; font-size: 24px; font-family: Roboto; font-weight: 700; word-wrap: break-word">BIENVENIDO</div>
-            <div style="width: 480px; height: 112px; left: 60px; top: 91px; position: absolute">
-              <div style="width: 480px; height: 56px; left: 0px; top: 29px; position: absolute; background: white; border-radius: 15px; border: 2px #FFA503 solid"></div>
-              <div style="left: 8px; top: 45px; position: absolute; color: rgba(0, 0, 0, 0.50); font-size: 20px; font-family: Roboto; font-weight: 300; word-wrap: break-word">nombreyapellido@cscc.edu.ar</div>
-              <div style="left: 0px; top: 0px; position: absolute; color: black; font-size: 20px; font-family: Roboto; font-weight: 700; word-wrap: break-word">Email</div>
-            </div>
-            <div style="width: 480px; height: 112px; left: 60px; top: 203px; position: absolute">
-              <div style="width: 480px; height: 56px; left: 0px; top: 29px; position: absolute; background: white; border-radius: 15px; border: 2px #FFA503 solid"></div>
-              <div style="left: 8px; top: 45px; position: absolute; color: rgba(0, 0, 0, 0.50); font-size: 20px; font-family: Roboto; font-weight: 300; word-wrap: break-word">Ingresa tu contraseña</div>
-              <div style="left: 0px; top: 0px; position: absolute; color: black; font-size: 20px; font-family: Roboto; font-weight: 700; word-wrap: break-word">Contraseña</div>
-              <div style="width: 31px; height: 31px; left: 436px; top: 42px; position: absolute">
-                <div style="width: 7.75px; height: 7.75px; left: 11.62px; top: 11.62px; position: absolute; background: rgba(0, 0, 0, 0.50)"></div>
-                <div style="width: 29.06px; height: 19.38px; left: 0.97px; top: 5.81px; position: absolute; background: rgba(0, 0, 0, 0.50)"></div>
-              </div>
-              <div style="left: 208px; top: 87px; position: absolute; color: black; font-size: 20px; font-family: Roboto; font-weight: 400; word-wrap: break-word">¿Has olvidado tu contraseña?</div>
-            </div>
-            <div style="padding-left: 39px; padding-right: 39px; padding-top: 16px; padding-bottom: 16px; left: 186.50px; top: 353px; position: absolute; background: #FFA503; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10); border-radius: 30px; overflow: hidden; justify-content: center; align-items: center; gap: 8px; display: inline-flex">
-              <div style="color: black; font-size: 20px; font-family: Roboto Flex; font-weight: 700; line-height: 16px; word-wrap: break-word">INICIAR SESIÓN</div>
-            </div>
-            <div style="left: 154px; top: 431px; position: absolute"><span style="color: black; font-size: 20px; font-family: Roboto; font-weight: 400; word-wrap: break-word">¿No tienes cuenta?</span><span style="color: black; font-size: 20px; font-family: Roboto; font-weight: 600; word-wrap: break-word"> </span><span style="color: black; font-size: 20px; font-family: Roboto; font-weight: 700; word-wrap: break-word">REGISTRATE</span></div>
-          </div>
-        </div>
+        <article>
+          <section>
+              <form action="/" method="POST">
+                <div class="login-wrap">
+                  <div class="login-html">
+                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Acceso</label>
+                    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Registro</label>
+                    <div class="login-form">
+                      <div class="sign-in-htm">
+                        <div class="group">
+                          <label for="user" class="label">Usuario</label>
+                          <input id="user" type="text" class="input">
+                        </div>
+                        <div class="group">
+                          <label for="pass" class="label">Contraseña</label>
+                          <input id="pass" type="password" class="input" data-type="password">
+                        </div>
+                        <div class="group">
+                          <input id="check" type="checkbox" class="check" checked>
+                          <label for="check"><span class="icon"></span> Recordar Usuario</label>
+                        </div>
+                        <div class="group">
+                          <input type="submit" class="button" value="INICIAR SESIÓN">
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                          <a href="#forgot">¿Has olvidado tu contraseña?</a>
+                        </div>
+                      </div>
+                      <div class="sign-up-htm">
+                        <div class="group">
+                          <label for="user" class="label">Usuario</label>
+                          <input id="user" type="text" class="input">
+                        </div>
+                        <div class="group">
+                          <label for="pass" class="label">Contraseña</label>
+                          <input id="pass" type="password" class="input" data-type="password">
+                        </div>
+                        <div class="group">
+                          <label for="pass" class="label">Repite Contraseña</label>
+                          <input id="pass" type="password" class="input" data-type="password">
+                        </div>
+                        <div class="group">
+                          <label for="pass" class="label">Email</label>
+                          <input id="pass" type="text" class="input">
+                        </div>
+                        <div class="group">
+                          <input type="submit" class="button" value="Sign Up">
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                          <label for="tab-1">¿Tienes Cuenta?</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+          </section>
+      </article>
       </main>
 
-      <%- include('../partials/footer.ejs')%>
   </body>
 
 </html>

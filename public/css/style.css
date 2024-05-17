@@ -4,3 +4,99 @@
     margin: 0;
     padding: 0;
 }
+
+/*********** Header Global************/
+header {
+    text-align: center;
+    height: 45px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    color: white;
+    border-bottom: 2px solid rgb(86 48 221);
+
+    width: 100%;
+    height: 45px;
+    align-items: center;
+    background-color: rgb(86 48 221);
+}
+
+nav ul li {
+    display: inline;
+    list-style: none;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: small;
+    margin: 0px;
+    transition: font-size 0.4s;
+}
+
+nav ul li a:hover {
+    font-size: 1.4rem;
+    color: goldenrod;
+}
+
+
+/*********** FIN Header ************/
+
+/******** FOOTER Global *********/
+footer {
+    display: flex;
+    text-align: center;
+    padding: 50px 0px 0px 0px;
+    background-color: rgb(86 48 221);
+    color: white;
+    flex-direction: column;
+    align-items: center;
+}
+
+.redes ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    /* Muestra los elementos de la lista en línea (en una fila) */
+    justify-content: center;
+    /* Centra los elementos de la lista horizontalmente */
+}
+
+.redes ul li {
+    margin: 0 10px;
+    /* Espacio entre cada ícono de red social */
+}
+
+.redes i {
+    color: white;
+    font-size: 2rem;
+    padding: 20px 10px
+}
+
+.linea-divisoria {
+    border: 1% solid #ece7e7;
+    width: 85%;
+    margin: 25px 0px 0px 0px;
+}
+
+.contact-section {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 15px 0px 15px 0px;
+    font-size: 12px;
+}
+
+.contact-section2 {
+    font-size: 0.8rem;
+}
+
+.copy {
+    font-size: 0.8rem;
+}
+
+/********FIN FOOTER*********/
