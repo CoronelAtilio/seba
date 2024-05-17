@@ -1,0 +1,11 @@
+Iniciar Sesión:
+
+Usuario: name="login-user"
+Contraseña: name="login-pass"
+Recordar Usuario: name="remember-me"
+Registro:
+
+Usuario: name="register-user"
+Contraseña: name="register-pass"
+Confirmar Contraseña: name="register-pass-confirm"
+Email: name="register-email"

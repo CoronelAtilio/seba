@@ -3,70 +3,46 @@
 <%- include('../partials/head', {estilo : "acceso.css" , titulo : "Acceso" }) %>
 
   <body>
-    <%- include('../partials/header.ejs')%>
+    <main>
+      <article>
+        <section>
+          <form action="/" method="POST">
+            <div class="login-wrap">
+              <div class="login-html">
+                <!-- Pestañas de navegación -->
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+                <label for="tab-1" class="tab">Acceso</label>
 
-      <main>
-        <article>
-          <section>
-              <form action="/" method="POST">
-                <div class="login-wrap">
-                  <div class="login-html">
-                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Acceso</label>
-                    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Registro</label>
-                    <div class="login-form">
-                      <div class="sign-in-htm">
-                        <div class="group">
-                          <label for="user" class="label">Usuario</label>
-                          <input id="user" type="text" class="input">
-                        </div>
-                        <div class="group">
-                          <label for="pass" class="label">Contraseña</label>
-                          <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                          <input id="check" type="checkbox" class="check" checked>
-                          <label for="check"><span class="icon"></span> Recordar Usuario</label>
-                        </div>
-                        <div class="group">
-                          <input type="submit" class="button" value="INICIAR SESIÓN">
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                          <a href="#forgot">¿Has olvidado tu contraseña?</a>
-                        </div>
-                      </div>
-                      <div class="sign-up-htm">
-                        <div class="group">
-                          <label for="user" class="label">Usuario</label>
-                          <input id="user" type="text" class="input">
-                        </div>
-                        <div class="group">
-                          <label for="pass" class="label">Contraseña</label>
-                          <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                          <label for="pass" class="label">Repite Contraseña</label>
-                          <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                          <label for="pass" class="label">Email</label>
-                          <input id="pass" type="text" class="input">
-                        </div>
-                        <div class="group">
-                          <input type="submit" class="button" value="Registrarme">
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                          <label for="tab-1">¿Tienes Cuenta?</a>
-                        </div>
-                      </div>
+                <!-- Contenido del formulario de Iniciar Sesión -->
+                <div class="login-form">
+                  <div class="sign-in-htm">
+                    <div class="group">
+                      <label for="login-user" class="label">Usuario</label>
+                      <input id="login-user" name="login-user" type="text" class="input">
+                    </div>
+                    <div class="group">
+                      <label for="login-pass" class="label">Contraseña</label>
+                      <input id="login-pass" name="login-pass" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                      <input id="check" name="remember-me" type="checkbox" class="check" checked>
+                      <label for="check"><span class="icon"></span> Recordar Usuario</label>
+                    </div>
+                    <div class="group">
+                      <input type="submit" class="button" value="INICIAR SESIÓN">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                      <a href="#forgot">¿Has olvidado tu contraseña?</a>
                     </div>
                   </div>
                 </div>
-              </form>
-          </section>
+              </div>
+            </div>
+          </form>
+        </section>
       </article>
-      </main>
+    </main>
 
   </body>
 
