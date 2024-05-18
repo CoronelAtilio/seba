@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const path = require('path')
 
-const indexController = require(path.resolve(__dirname,"../controllers/mainControllers"));
+const indexControllers = require(path.resolve(__dirname,"../controllers/indexControllers"));
 
 //RUTAS
+
 // http://localhost:4000/
-router.get("/", indexController.index);
+router.get("/", indexControllers.acceso)
+router.post("/", indexControllers.accesoVerificacion)
 
 module.exports = router;

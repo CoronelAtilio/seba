@@ -4,13 +4,13 @@ const app = express();
 const path = require("path");
 
 //SESSION de USUARIO
-// const session = require('express-session')
-// app.use(session({
-//     secret: 'Mi secreto',
-//     //POR LO VISTO ESTAN DEPRECADOS
-//     resave: false,
-//     saveUninitialized: false
-// }));
+const session = require('express-session')
+app.use(session({
+    secret: 'Mi secreto',
+    //POR LO VISTO ESTAN DEPRECADOS
+    resave: false,
+    saveUninitialized: false
+}));
 
 //COOKIES
 // const cookies = require('cookie-parser')
@@ -50,13 +50,17 @@ app.listen(port, () => {
 // app.use(userLoggedMiddleware)
 
 /*ROUTES*/
-const rutasUsuarios = require(path.resolve(__dirname,"./routes/users.routes"));
 const rutasAdmin = require(path.resolve(__dirname,"./routes/admin.routes"));
+const rutasPreceptor = require(path.resolve(__dirname,"./routes/preceptor.routes"));
+const rutasDocente = require(path.resolve(__dirname,"./routes/docente.routes"));
+const rutasDirectivo = require(path.resolve(__dirname,"./routes/directivo.routes"));
 const rutasIndex = require(path.resolve(__dirname,"./routes/main.routes"));
 
 /*ENTRY POINTS*/
-app.use("/usuario", rutasUsuarios);
 app.use("/admin", rutasAdmin);
+app.use("/preceptor", rutasPreceptor);
+app.use("/docente", rutasDocente);
+app.use("/directivo", rutasDirectivo);
 app.use("/", rutasIndex);
 
 
