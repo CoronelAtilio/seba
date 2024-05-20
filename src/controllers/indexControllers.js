@@ -8,7 +8,6 @@ module.exports = {
   accesoVerificacion: async (req, res) => {
     const { loginUser, loginPass, rememberMe } = req.body;
 
-    req.session.countIntentos = req.session.countIntentos || 1;
     try {
       const user = await db.Usuario.findOne({ //User Puede llegar a ser null
         include: [{
@@ -22,15 +21,33 @@ module.exports = {
           }
         }
       });
-      console.log(user);
-      if (user == null && req.session.countIntentos != 3) {  // Analizo si existe usuario y números de intentos
-        req.session.countIntentos++;
-        return res.send(`intentos restantes ${4-req.session.countIntentos}`);
-      } else if (req.session.countIntentos == 3) {
-        return res.send('intentos excedidos');
-      }else{
 
+      if (!user) {  // Analizo si existe usuario
+        return res.send(`usuario ${loginUser} no existe`);
+      } else if (user.password_usuario != loginPass) {
+        return res.send(`contraseña ${loginPass} incorrecta`)
+      } else {
+        let expiresAt = null;
+
+        if (rememberMe) {
+          expiresAt = Date.now() + 1000 * 60 * 3; // 3 minutos
+        }
+        req.session.userLogged = {
+          usuario: loginUser,
+          rol: user.Rol.permisos,
+          expiresAt: expiresAt
+          //expiresAt es la cookie que voy a usar
+        }
+        return res.redirect('/welcome')
       }
+    } catch (error) {
+      console.log(error.message);
+      res.send(error.message);
+    }
+  },
+  bienvenida: async(req,res)=>{
+    try {
+      res.render('index/bienvenida')
     } catch (error) {
       console.log(error.message);
       res.send(error.message);
