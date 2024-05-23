@@ -28,7 +28,7 @@ a { color: inherit; text-decoration: none; }
     align-items: center; /* Centrar verticalmente */
     position: absolute;
     padding: 90px 70px 50px 70px;
-    background: rgba(255, 255, 255, 0.752);
+    background: rgba(0, 157, 224, 0.608);
 }
 .login-html .tab-container {
     text-align: center; /* Centrar el contenido de las pestañas */
