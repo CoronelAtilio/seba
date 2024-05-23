@@ -16,14 +16,19 @@ a { color: inherit; text-decoration: none; }
     max-width: 525px;
     min-height: 100vh;
     position: relative;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    position: relative;
     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
 }
 .login-html {
     width: 100%;
     height: 100vh;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
     position: absolute;
     padding: 90px 70px 50px 70px;
-    background: rgba(40, 57, 101, .9);
+    background: rgba(255, 255, 255, 0.752);
 }
 .login-html .tab-container {
     text-align: center; /* Centrar el contenido de las pestañas */
@@ -49,6 +54,7 @@ a { color: inherit; text-decoration: none; }
 }
 .login-html .tab {
     font-size: 22px;
+    color: #000000;
     margin-bottom: 20px; /* Ajustar margen inferior */
     display: inline-block;
     border-bottom: 2px solid transparent;
@@ -57,8 +63,8 @@ a { color: inherit; text-decoration: none; }
     text-align: center; /* Centra el texto */
 }
 .login-html .sign-in:checked + .tab {
-    color: #fff;
-    border-color: #1161ee;
+    color: #000000;
+    border-color: #FFA503;
 }
 .login-form {
     min-height: 345px;
@@ -71,7 +77,7 @@ a { color: inherit; text-decoration: none; }
 .login-form .group .input,
 .login-form .group .button {
     width: 100%;
-    color: #fff;
+    color: #000000;
     display: block;
 }
 .login-form .group .input,
@@ -79,19 +85,23 @@ a { color: inherit; text-decoration: none; }
     border: none;
     padding: 15px 20px;
     border-radius: 25px;
-    background: rgba(255, 255, 255, .1);
+    background: #1162ee66(255, 255, 255, .1);
 }
 .login-form .group input[data-type="password"] {
     text-security: circle;
     -webkit-text-security: circle;
 }
+.login-form .group input:focus[type="text"]{
+    border-color: #FFA503;
+}
+
 .login-form .group .label {
-    color: #aaa;
-    font-size: 12px;
+    color: #000000;
+    font-size: 14px;
     text-align: left; /* Asegura que los labels no estén centrados */
 }
 .login-form .group .button {
-    background: #1161ee;
+    background: #FFA503;
 }
 .login-form .group label .icon {
     width: 15px;
@@ -122,10 +132,10 @@ a { color: inherit; text-decoration: none; }
     transform: scale(0) rotate(0);
 }
 .login-form .group .check:checked + label {
-    color: #fff;
+    color: #000000;
 }
 .login-form .group .check:checked + label .icon {
-    background: #1161ee;
+    background: #FFA503;
 }
 .login-form .group .check:checked + label .icon:before {
     transform: scale(1) rotate(45deg);
@@ -140,6 +150,8 @@ a { color: inherit; text-decoration: none; }
 }
 .foot-lnk {
     text-align: center;
+    color: #000000;
+    font-size: 14px;
 }
 
 
