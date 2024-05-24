@@ -51,8 +51,8 @@ app.listen(port, () => {
 });
 
 //MIDDLEWARES
-// const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware')
-// app.use(userLoggedMiddleware)
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware')
+app.use(userLoggedMiddleware)
 
 /*ROUTES*/
 const rutasAdmin = require(path.resolve(__dirname, "./routes/admin.routes"));
