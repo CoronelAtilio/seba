@@ -8,13 +8,13 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">AdminHub</span>
+			<span class="text"><%= locals.userLogged.rol %></span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
 				<a href="#">
 					<i class='bx bxs-dashboard' ></i>
-					<span class="text">Dashboard</span>
+					<span class="text">Escritorio</span>
 				</a>
 			</li>
 			<li>
@@ -66,10 +66,10 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
+			<a href="#" class="nav-link">Categorías</a>
+			<form id="searchForm">
 				<div class="form-input">
-					<input type="search" placeholder="Search...">
+					<input type="search" placeholder="Buscar...">
 					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
 				</div>
 			</form>
@@ -89,7 +89,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Bienvenido <%= locals.userLogged.usuario %></h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="#">Dashboard</a>
@@ -102,32 +102,21 @@
 				</div>
 				<a href="#" class="btn-download">
 					<i class='bx bxs-cloud-download' ></i>
-					<span class="text">Download PDF</span>
+					<span class="text">Descargar PDF(luego)</span>
 				</a>
 			</div>
 
 			<ul class="box-info">
-				<li>
-					<i class='bx bxs-calendar-check' ></i>
-					<span class="text">
-						<h3>1020</h3>
-						<p>New Order</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>2834</h3>
-						<p>Visitors</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle' ></i>
-					<span class="text">
-						<h3>$2543</h3>
-						<p>Total Sales</p>
-					</span>
-				</li>
+				<% for( let index = 0; index < tablasCant.length; index++ ) { %>
+					<li>
+						<i class='bx bxs-calendar-check' ></i>
+						<span class="text">
+							<h3><%= tablasCant[index].dataValues.Cantidades %></h3>
+							<p><%= tablasCant[index].dataValues.Tablas %></p>
+						</span>
+					</li>
+				
+				<% } %>
 			</ul>
 
 

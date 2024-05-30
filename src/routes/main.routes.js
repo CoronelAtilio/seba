@@ -14,5 +14,6 @@ router.post("/", loginMiddleware,indexControllers.accesoVerificacion)
 
 // http://localhost:4000/welcome
 router.get("/welcome",indexControllers.bienvenida)
+router.get("/welcome/buscar", indexControllers.bienvenidaSearch)
 
 module.exports = router;

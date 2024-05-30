@@ -63,10 +63,45 @@ module.exports = {
     },
     bienvenida: async (req, res) => {
         try {
-            res.render('index/bienvenida');
+            // Aquí ejecuto actualización necesaria
+            await db.sequelize.query('ANALYZE TABLE all_tables_values;');
+
+            const tablasCant = await db.Tables_Values.findAll({
+                attributes: [
+                    ['table_name', 'Tablas'], ['table_rows', 'Cantidades']
+                ]
+            });
+            res.render('index/bienvenida', { tablasCant });
+
         } catch (error) {
-            console.log(error.message);
-            res.send(error.message);
+            console.log(error);
+            res.status(500).send('Internal Server Error');
         }
-    }
+    },
+    bienvenidaSearch: async (req, res) => {
+        try {
+            await db.sequelize.query('ANALYZE TABLE all_tables_values;');
+    
+            const search = req.query.search || '';
+    
+            // Consulta con búsqueda (like)
+            const tablasCant = await db.Tables_Values.findAll({
+                attributes: [
+                    ['table_name', 'Tablas'], ['table_rows', 'Cantidades']
+                ],
+                where: {
+                    table_name: {
+                        [Op.like]: `%${search}%`
+                    }
+                }
+            });
+    
+            res.render('index/bienvenida', { tablasCant });
+    
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Internal Server Error');
+        }
+    },
+    
 };

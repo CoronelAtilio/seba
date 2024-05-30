@@ -10,11 +10,11 @@ app.use(session({
     //POR LO VISTO ESTAN DEPRECADOS
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        maxAge: 60000 * 60, // 1 minuto * 60
-        secure: true, // true si estás usando HTTPS
-        httpOnly: true // La cookie solo se puede acceder a través de HTTP(S)
-    }
+    // cookie: {
+    //     maxAge: 60000 * 60, // 1 minuto * 60
+    //     secure: true, // true si estás usando HTTPS
+    //     httpOnly: true // La cookie solo se puede acceder a través de HTTP(S)
+    // }
 }));
 
 //COOKIES
