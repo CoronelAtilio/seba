@@ -1,14 +1,21 @@
-<header>
-  <nav>
-    <div class="menu-container">
-      <ul id="menu">
-        <li><a href="/">Acceso</a></li>
-        <li><a href="/welcome">Welcome</a></li>
-        <li><a href="/admin">Administrador</a></li>
-        <li><a href="/preceptor">Preceptor</a></li>
-        <li><a href="/docente">Docente</a></li>
-        <li><a href="/directivo">Directivo</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
+<nav>
+    <i class='bx bx-menu'></i>
+    <a href="#" class="nav-link">Categorías</a>
+
+    <form action="<%= form_action %>" method="get">
+        <div class="form-input">
+            <input id="searchInput" type="search" placeholder="Buscar..." name="search">
+            <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+        </div>
+    </form>
+
+    <input type="checkbox" id="switch-mode" hidden>
+    <label for="switch-mode" class="switch-mode"></label>
+    <a href="#" class="notification">
+        <i class='bx bxs-bell'></i>
+        <span class="num">8</span>
+    </a>
+    <a href="#" class="profile">
+        <img src="img/people.png">
+    </a>
+</nav>

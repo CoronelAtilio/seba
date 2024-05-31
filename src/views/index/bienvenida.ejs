@@ -2,92 +2,20 @@
 <html lang="en">
 <!--Head-->
 <%- include('../partials/head.ejs', {titulo: "Escritorio" ,style: "style.css" , estilo: "bienvenida.css" })%>
+
+<!--Script de carga inicial-->
+<script src="/js/index/bienvenida.js"></script>
+
         <!-- CONTENT -->
-        <script src="/js/index/bienvenida.js"></script>
-    <body>
+    <body class="hidden">
         <!-- SIDEBAR -->
-        <section id="sidebar">
-            <a href="#" class="brand">
-                <i class='bx bxs-smile'></i>
-                <span class="text">
-                    <%= locals.userLogged.rol %>
-                </span>
-            </a>
-            <ul class="side-menu top">
-                <li class="active">
-                    <a href="#">
-                        <i class='bx bxs-dashboard'></i>
-                        <span class="text">Escritorio</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bxs-shopping-bag-alt'></i>
-                        <span class="text">My Store</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bxs-doughnut-chart'></i>
-                        <span class="text">Analytics</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bxs-message-dots'></i>
-                        <span class="text">Message</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bxs-group'></i>
-                        <span class="text">Team</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="side-menu">
-                <li>
-                    <a href="#">
-                        <i class='bx bxs-cog'></i>
-                        <span class="text">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="logout">
-                        <i class='bx bxs-log-out-circle'></i>
-                        <span class="text">Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
+        <%- include('../partials/sidebar.ejs') %>
         <!-- SIDEBAR -->
-
-
 
         <!-- CONTENT -->
         <section id="content">
             <!-- NAVBAR -->
-            <nav>
-                <i class='bx bx-menu'></i>
-                <a href="#" class="nav-link">Categorías</a>
-
-                <form action="/welcome/buscar" method="get">
-                    <div class="form-input">
-                        <input id="searchInput" type="search" placeholder="Buscar..." name="search">
-                        <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-                    </div>
-                </form>
-                
-                <input type="checkbox" id="switch-mode" hidden>
-                <label for="switch-mode" class="switch-mode"></label>
-                <a href="#" class="notification">
-                    <i class='bx bxs-bell'></i>
-                    <span class="num">8</span>
-                </a>
-                <a href="#" class="profile">
-                    <img src="img/people.png">
-                </a>
-            </nav>
+            <%- include('../partials/header.ejs',{form_action: "/welcome/buscar"}) %>
             <!-- NAVBAR -->
         
             <!-- MAIN -->
@@ -97,11 +25,11 @@
                         <h1>Bienvenido <%= locals.userLogged.usuario %></h1>
                         <ul class="breadcrumb">
                             <li>
-                                <a href="#">Dashboard</a>
+                                <a href="#">Home</a>
                             </li>
                             <li><i class='bx bx-chevron-right'></i></li>
                             <li>
-                                <a class="active" href="#">Home</a>
+                                <a class="active" href="#">Escritorio</a>
                             </li>
                         </ul>
                     </div>
@@ -110,25 +38,8 @@
                         <span class="text">Descargar PDF(luego)</span>
                     </a>
                 </div>
-        
-                <ul id="resultsContainer" class="box-info">
-                    <% for( let index=0; index < tablasCant.length; index++ ) { %>
-                        <li>
-                            <i class='bx bxs-calendar-check'></i>
-                            <span class="text">
-                                <h3>
-                                    <%= tablasCant[index].dataValues.Cantidades %>
-                                </h3>
-                                <p>
-                                    <%= tablasCant[index].dataValues.Tablas %>
-                                </p>
-                            </span>
-                        </li>
 
-                        <% } %>
-                </ul>
-
-
+                <!--TABLA Resultado Categoria-->
                 <div class="table-data">
                     <div class="order">
                         <div class="head">
@@ -138,90 +49,34 @@
                         </div>
                         <table>
                             <thead>
-                                <tr>
-                                    <th>User</th>
-                                    <th>Date Order</th>
-                                    <th>Status</th>
+                                <tr class="atributos">
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="img/people.png">
-                                        <p>John Doe</p>
-                                    </td>
-                                    <td>01-10-2021</td>
-                                    <td><span class="status completed">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="img/people.png">
-                                        <p>John Doe</p>
-                                    </td>
-                                    <td>01-10-2021</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="img/people.png">
-                                        <p>John Doe</p>
-                                    </td>
-                                    <td>01-10-2021</td>
-                                    <td><span class="status process">Process</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="img/people.png">
-                                        <p>John Doe</p>
-                                    </td>
-                                    <td>01-10-2021</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="img/people.png">
-                                        <p>John Doe</p>
-                                    </td>
-                                    <td>01-10-2021</td>
-                                    <td><span class="status completed">Completed</span></td>
-                                </tr>
+                            <tbody class="valores">
                             </tbody>
                         </table>
                     </div>
                     <div class="todo">
                         <div class="head">
-                            <h3>Todos</h3>
+                            <h3>Categorías</h3>
                             <i class='bx bx-plus'></i>
                             <i class='bx bx-filter'></i>
                         </div>
                         <ul class="todo-list">
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="not-completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
-                            <li class="not-completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </li>
+                            <% for(let index = 0; index < tablasCant.length; index++) { %>
+                                <li class="completed category-button">
+                                    <p><%= tablasCant[index].dataValues.Tablas %></p>
+                                    <i class='bx bx-send'></i>
+                                </li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
             </main>
             <!-- MAIN -->
         </section>
-
+        <!--Script para mejorar la respuesta con "hide"-->
+        <script src="/js/index/bienvenidaMejora.js"></script>
     </body>
 
 </html>

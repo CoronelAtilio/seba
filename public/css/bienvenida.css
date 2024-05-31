@@ -590,3 +590,7 @@ body {
 		min-width: 420px;
 	}
 }
+
+.hidden {
+    display: none;
+}

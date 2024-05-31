@@ -68,6 +68,12 @@ app.use("/docente", rutasDocente);
 app.use("/directivo", rutasDirectivo);
 app.use("/", rutasIndex);
 
+/*APIs*/
+/*ROUTES*/
+const rutasApiIndex = require(path.resolve(__dirname, "./routes/apis/apiIndex.routes"));
+
+/*ENTRY POINTS*/
+app.use("/api/index", rutasApiIndex);
 
 /*RESPUESTA AL ERROR 404*/
 app.use((req, res, next) => {
