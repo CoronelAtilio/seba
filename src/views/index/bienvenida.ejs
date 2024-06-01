@@ -35,7 +35,7 @@
                     </div>
                     <a href="#" class="btn-download">
                         <i class='bx bxs-cloud-download'></i>
-                        <span class="text">Descargar PDF(luego)</span>
+                        <span class="text">Descargar PDF(próximo)</span>
                     </a>
                 </div>
 
@@ -43,7 +43,7 @@
                 <div class="table-data">
                     <div class="order">
                         <div class="head">
-                            <h3>Recent Orders</h3>
+                            <h3 id="categoria_nombre">Elije Categoría</h3>
                             <i class='bx bx-search'></i>
                             <i class='bx bx-filter'></i>
                         </div>
@@ -66,7 +66,6 @@
                             <% for(let index = 0; index < tablasCant.length; index++) { %>
                                 <li class="completed category-button">
                                     <p><%= tablasCant[index].dataValues.Tablas %></p>
-                                    <i class='bx bx-send'></i>
                                 </li>
                             <% } %>
                         </ul>

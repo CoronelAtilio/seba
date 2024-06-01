@@ -81,9 +81,9 @@ module.exports = {
     bienvenidaSearch: async (req, res) => {
         try {
             await db.sequelize.query('ANALYZE TABLE all_tables_values;');
-    
+
             const search = req.query.search || '';
-    
+
             // Consulta con búsqueda (like)
             const tablasCant = await db.Tables_Values.findAll({
                 attributes: [
@@ -95,13 +95,17 @@ module.exports = {
                     }
                 }
             });
-    
+
             res.render('index/bienvenida', { tablasCant });
-    
+
         } catch (error) {
             console.log(error);
             res.status(500).send('Internal Server Error');
         }
     },
-    
+    logout: (req, res) => {
+        req.session.destroy();
+        return res.redirect("/");
+    }
+
 };

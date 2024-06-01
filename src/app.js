@@ -42,17 +42,11 @@ app.use(express.json());
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
-/*PUERTO*/
-const port = process.env.PORT || 4000;
-app.listen(port, () => {
-    console.log(`
-    Nuestra app funciona en
-    http://localhost:${port}`);
-});
-
 //MIDDLEWARES
-const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware')
+const userLoggedMiddleware = require(path.resolve(__dirname,'./middlewares/userLoggedMiddleware'))
 app.use(userLoggedMiddleware)
+
+const notLoggedMiddleware = require(path.resolve(__dirname,'./middlewares/notLoggedMiddleware'))
 
 /*ROUTES*/
 const rutasAdmin = require(path.resolve(__dirname, "./routes/admin.routes"));
@@ -62,10 +56,10 @@ const rutasDirectivo = require(path.resolve(__dirname, "./routes/directivo.route
 const rutasIndex = require(path.resolve(__dirname, "./routes/main.routes"));
 
 /*ENTRY POINTS*/
-app.use("/admin", rutasAdmin);
-app.use("/preceptor", rutasPreceptor);
-app.use("/docente", rutasDocente);
-app.use("/directivo", rutasDirectivo);
+app.use("/admin",notLoggedMiddleware, rutasAdmin);
+app.use("/preceptor",notLoggedMiddleware, rutasPreceptor);
+app.use("/docente",notLoggedMiddleware, rutasDocente);
+app.use("/directivo",notLoggedMiddleware, rutasDirectivo);
 app.use("/", rutasIndex);
 
 /*APIs*/
@@ -78,4 +72,12 @@ app.use("/api/index", rutasApiIndex);
 /*RESPUESTA AL ERROR 404*/
 app.use((req, res, next) => {
     res.status(404).render("404");
+});
+
+/*PUERTO*/
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+    console.log(`
+    Nuestra app funciona en
+    http://localhost:${port}`);
 });

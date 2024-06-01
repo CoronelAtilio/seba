@@ -4,16 +4,20 @@ const path = require('path')
 
 //Importaciones
 const indexControllers = require(path.resolve(__dirname,"../controllers/indexControllers"));
-const loginMiddleware = require(path.resolve(__dirname,"../middlewares/loginMiddleware"))
+const loginValidationMiddleware = require(path.resolve(__dirname,"../middlewares/loginValidationMiddleware"))
+const notLoggedMiddleware = require(path.resolve(__dirname,'../middlewares/notLoggedMiddleware'))
 
 //RUTAS
 
 // http://localhost:4000/
 router.get("/", indexControllers.acceso)
-router.post("/", loginMiddleware,indexControllers.accesoVerificacion)
+router.post("/", loginValidationMiddleware,indexControllers.accesoVerificacion)
 
 // http://localhost:4000/welcome
-router.get("/welcome",indexControllers.bienvenida)
-router.get("/welcome/buscar", indexControllers.bienvenidaSearch)
+router.get("/welcome",notLoggedMiddleware,indexControllers.bienvenida)
+router.get("/welcome/buscar",notLoggedMiddleware, indexControllers.bienvenidaSearch)
+
+// http://localhost:4000/logout
+router.get("/logout",notLoggedMiddleware,indexControllers.logout)
 
 module.exports = router;

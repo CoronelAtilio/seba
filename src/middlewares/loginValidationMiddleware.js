@@ -1,6 +1,6 @@
 const { body, validationResult } = require('express-validator');
 
-const loginMiddleware = [
+const loginValidationMiddleware = [
     body('loginUser')
         .notEmpty()
         .withMessage('Campo Obligatorio'),
@@ -19,4 +19,4 @@ const loginMiddleware = [
     }
 ];
 
-module.exports = loginMiddleware;
+module.exports = loginValidationMiddleware;

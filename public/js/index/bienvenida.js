@@ -1,11 +1,12 @@
 function updateTable(data) {
+
     const atributos = document.querySelector('.atributos');
     const valores = document.querySelector('.valores');
     atributos.innerHTML = '';
     valores.innerHTML = '';
 
     // Suponiendo que todos los objetos tienen las mismas claves
-    const keys = Object.keys(data[0]);
+    const keys = Object.keys(data.data[0]);
 
     // Agregar los nombres de los atributos a la cabecera
     keys.forEach(key => {
@@ -13,10 +14,9 @@ function updateTable(data) {
         th.textContent = key;
         atributos.appendChild(th);
     });
-    console.log(atributos);
 
     // Agregar los valores de los objetos al cuerpo de la tabla
-    data.forEach(item => {
+    data.data.forEach(item => {
         const tr = document.createElement('tr'); // Nueva fila para cada objeto
         keys.forEach(key => {
             const td = document.createElement('td');
@@ -25,7 +25,10 @@ function updateTable(data) {
         });
         valores.appendChild(tr); // Agregar la fila completa a la tabla
     });
-    console.log(valores);
+
+    //cambio nombre al seleccionar categoría
+    const nombreCategoria = document.getElementById('categoria_nombre')
+    nombreCategoria.textContent = data.meta.table_name
 }
 
 
@@ -101,12 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(categoryButtons);
     // Agrega un event listener a cada botón
     categoryButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            fetch('/api/index')
+        button.addEventListener('click', function (event) {
+            console.log(event.target.innerText);
+            fetch(`/api/index/${event.target.innerText}`)
                 .then(response => response.json())
                 .then(alumnos => {
-                    console.log(alumnos);
-                    updateTable(alumnos.data);
+                    updateTable(alumnos);
                 })
                 .catch(error => console.error('Error:', error));
         });
