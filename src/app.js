@@ -9,7 +9,8 @@ app.use(session({
     secret: 'Mi_secreto',
     //POR LO VISTO ESTAN DEPRECADOS
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Cambia a true si usas HTTPS
     // cookie: {
     //     maxAge: 60000 * 60, // 1 minuto * 60
     //     secure: true, // true si estás usando HTTPS
@@ -18,8 +19,8 @@ app.use(session({
 }));
 
 //COOKIES
-// const cookies = require('cookie-parser')
-// app.use(cookies())
+const cookies = require('cookie-parser')
+app.use(cookies())
 
 //VERIFICACION DE CONECCION SEQUELIZE
 const checkConnection = require(path.resolve(__dirname, './database/config/checkConnection'));
@@ -56,7 +57,7 @@ const rutasDirectivo = require(path.resolve(__dirname, "./routes/directivo.route
 const rutasIndex = require(path.resolve(__dirname, "./routes/main.routes"));
 
 /*ENTRY POINTS*/
-app.use("/admin",notLoggedMiddleware, rutasAdmin);
+app.use("/administrador",notLoggedMiddleware, rutasAdmin);
 app.use("/preceptor",notLoggedMiddleware, rutasPreceptor);
 app.use("/docente",notLoggedMiddleware, rutasDocente);
 app.use("/directivo",notLoggedMiddleware, rutasDirectivo);

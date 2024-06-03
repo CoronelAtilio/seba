@@ -42,16 +42,15 @@ module.exports = {
                     old: req.body,
                 });
             } else {
-                let expiresAt = null;
-
                 if (rememberMe) {
-                    expiresAt = Date.now() + 1000 * 60 * 3; // 3 minutos
+                    res.cookie('userSession', loginUser, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
+                }else{
+                    res.cookie('userSession', loginUser, { httpOnly: true });
                 }
 
                 req.session.userLogged = {
                     usuario: loginUser,
-                    rol: user.Rol.permisos,
-                    expiresAt: expiresAt
+                    rol: user.Rol.permisos
                 };
 
                 return res.redirect('/welcome');
@@ -104,6 +103,7 @@ module.exports = {
         }
     },
     logout: (req, res) => {
+        res.clearCookie('userSession');
         req.session.destroy();
         return res.redirect("/");
     }

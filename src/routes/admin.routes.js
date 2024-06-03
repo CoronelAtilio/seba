@@ -7,7 +7,7 @@ const adminControllers = require(path.resolve(__dirname,"../controllers/adminCon
 
 //RUTAS
 // http://localhost:4000/admin
-router.get('/',adminControllers.admin)
+router.get('/usuario',adminControllers.admin)
 
 
 module.exports = router;
