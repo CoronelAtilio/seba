@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator');
+const { body } = require('express-validator');
 
 const loginValidationMiddleware = [
     body('loginUser')
@@ -9,14 +9,7 @@ const loginValidationMiddleware = [
         .withMessage('Campo Obligatorio')
         .bail()
         .isLength({ min: 3 })
-        .withMessage('Contraseña inválida'),
-    async (req, res, next) => {
-        await Promise.all([
-            body('loginUser').run(req),
-            body('loginPass').run(req)
-        ]);
-        next();
-    }
+        .withMessage('Contraseña inválida')
 ];
 
 module.exports = loginValidationMiddleware;

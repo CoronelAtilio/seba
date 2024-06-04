@@ -14,18 +14,221 @@
             <%- include('../partials/header.ejs', {form_action: "#" }) %>
                 <!-- MAIN -->
                 <main>
-                    
                     <ul class="nav-links container">
-                        <li class="center"><a href="#">Registrar</a></li>
-                        <li class="upward"><a href="#">Crear Usuario</a></li>
-                        <li class="forward"><a href="#">Modificar</a></li>
+                        <li class="upward"><a href="#" data-form="form1">Crear Usuario</a></li>
+                        <li class="center"><a href="#" data-form="form2">Registrar Docente</a></li>
+                        <li class="forward"><a href="#" data-form="form3">Modificar Usuario</a></li>
+                        <li class="forward"><a href="#" data-form="form4">Modificar docente</a></li>
                     </ul>
 
                     <div class="container">
-                        <form action="#">
+                        <!-- Formulario 1 -->
+                        <form id="form1" class="form-content" style="display:none;"
+                            action="/administrador/crear/usuario" method="post">
                             <div class="form first">
                                 <div class="details personal">
-                                    <span class="title">Detalles Personales</span>
+                                    <span class="title">Datos para Crear Usuario</span>
+                                    <div class="fields">
+                                        <div class="input-field">
+                                            <label for="nombre_usuario">Usuario</label>
+                                            <input type="text" placeholder="Ingresa nombre de Usuario"
+                                                name="nombre_usuario" value="<%= locals.old1 && old1.nombre_usuario ? old1.nombre_usuario : '' %>" required>
+                                        </div>
+                                        <!--comentario para los errores-->
+                                        <% if (locals.errors1 && locals.errors1.nombre_usuario) { %>
+                                            <div style="color: red;">
+                                                <%= locals.errors1.nombre_usuario.msg %>
+                                            </div>
+                                            <% } %>
+
+                                        <div class="input-field">
+                                            <label for="password_usuario">Contraseña</label>
+                                            <input type="text" placeholder="Ingresa tu Contraseña"
+                                                name="password_usuario" required>
+                                        </div>
+
+                                        <div class="input-field">
+                                            <label for="password_usuario2">Confirma Contraseña</label>
+                                            <input type="text" placeholder="Repite tu Contraseña"
+                                                name="password_usuario2" required>
+                                        </div>
+
+                                        <!--comentario para los errores-->
+                                        <% if (locals.errors1 && locals.errors1.password_usuario2) { %>
+                                            <div style="color: red;">
+                                                <%= locals.errors1.password_usuario2.msg %>
+                                            </div>
+                                            <% } %>
+
+                                                <div class="input-field">
+                                                    <label for="permisos">Rol</label>
+                                                    <select name="permisos" required>
+                                                        <option disabled selected>Selecciona Rol de Usuario</option>
+                                                        <option>Administrador</option>
+                                                        <option>Docente</option>
+                                                        <option>Director</option>
+                                                        <option>Preceptor</option>
+                                                    </select>
+                                                </div>
+
+                                    </div>
+                                </div>
+                                <button class="nextBtn" type="submit">
+                                    <span class="btnText">Enviar</span>
+                                    <i class="uil uil-navigator"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Formulario 2 -->
+                        <form id="form2" class="form-content" style="display:none;" action="#">
+                            <div class="form first">
+                                <div class="details personal">
+                                    <span class="title">Datos para Registrar</span>
+                                    <div class="fields">
+                                        <div class="input-field">
+                                            <label>Apellido/s</label>
+                                            <input type="text" placeholder="Ingresa tu/s apellido/s" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Nombre/s</label>
+                                            <input type="text" placeholder="Ingresa tu/s nombre/s" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Fecha de Nacimiento</label>
+                                            <input type="date" placeholder="Ingresa tu fecha de nacimiento" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Email</label>
+                                            <input type="text" placeholder="algo@algo.com" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Celular</label>
+                                            <input type="text" placeholder="3855234345" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Género</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Género</option>
+                                                <option>Hombre</option>
+                                                <option>Mujer</option>
+                                                <option>Otro</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Cargo</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Cargo</option>
+                                                <option>Director</option>
+                                                <option>Preceptor</option>
+                                                <option>Docente</option>
+                                                <option>Técnico</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>DNI</label>
+                                            <input type="text" placeholder="34094325" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Situación</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Situación</option>
+                                                <option>Suplente</option>
+                                                <option>Titular</option>
+                                                <option>Interino</option>
+                                                <option>Provisional</option>
+                                                <option>Adjunto</option>
+                                                <option>Jornada Parcial</option>
+                                                <option>Jornada Completa</option>
+                                                <option>Sustituto</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="nextBtn" type="submit">
+                                    <span class="btnText">Enviar</span>
+                                    <i class="uil uil-navigator"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Formulario 3 -->
+                        <form id="form3" class="form-content" style="display:none;" action="#">
+                            <div class="form first">
+                                <div class="details personal">
+                                    <span class="title">Datos para Modificar Usuario</span>
+                                    <div class="fields">
+                                        <div class="input-field">
+                                            <label>Apellido/s</label>
+                                            <input type="text" placeholder="Ingresa tu/s apellido/s" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Nombre/s</label>
+                                            <input type="text" placeholder="Ingresa tu/s nombre/s" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Fecha de Nacimiento</label>
+                                            <input type="date" placeholder="Ingresa tu fecha de nacimiento" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Email</label>
+                                            <input type="text" placeholder="algo@algo.com" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Celular</label>
+                                            <input type="text" placeholder="3855234345" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Género</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Género</option>
+                                                <option>Hombre</option>
+                                                <option>Mujer</option>
+                                                <option>Otro</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Cargo</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Cargo</option>
+                                                <option>Director</option>
+                                                <option>Preceptor</option>
+                                                <option>Docente</option>
+                                                <option>Técnico</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>DNI</label>
+                                            <input type="text" placeholder="34094325" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Situación</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Situación</option>
+                                                <option>Suplente</option>
+                                                <option>Titular</option>
+                                                <option>Interino</option>
+                                                <option>Provisional</option>
+                                                <option>Adjunto</option>
+                                                <option>Jornada Parcial</option>
+                                                <option>Jornada Completa</option>
+                                                <option>Sustituto</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="nextBtn" type="submit">
+                                    <span class="btnText">Enviar</span>
+                                    <i class="uil uil-navigator"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Formulario 4 -->
+                        <form id="form4" class="form-content" style="display:none;" action="#">
+                            <div class="form first">
+                                <div class="details personal">
+                                    <span class="title">Datos para Modificar Docente</span>
                                     <div class="fields">
                                         <div class="input-field">
                                             <label>Apellido/s</label>
