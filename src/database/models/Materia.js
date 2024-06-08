@@ -9,18 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         nombre_materia: {
             type: DataTypes.STRING(100),
             allowNull: false
-        },
-        fk_idcurso_materia :{
-            type: DataTypes.INTEGER.UNSIGNED,
-            defaultValue : null
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         }
     }
     let config = {
@@ -29,19 +17,15 @@ module.exports = (sequelize, DataTypes) => {
     const Materia = sequelize.define(alias, cols, config)
 
     Materia.associate = function(models){
-        Materia.belongsTo(models.Curso, {
-            as : "Curso",
-            foreignKey : "fk_idcurso_materia"
-        })
 
         Materia.hasMany(models.Profesor_Materia, {
-            as : "Profesor_Materia",
+            as : "Profesores_Materias",
             foreignKey : "fk_idmateria_profesormateria"
         })
 
-        Materia.hasMany(models.Alumno_Materia, {
-            as : "Alumno_Materia",
-            foreignKey : "fk_idmateria_alumnomateria"
+        Materia.hasMany(models.Al_Mat_Not_Cur, {
+            as : "Al_Mat_Not_Curs",
+            foreignKey : "fk_idmateria_almatnotcur"
         })
     }
 

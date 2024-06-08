@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(100),
             allowNull: false
         },
-        fk_idrol_usuario :{
+        fk_idcargo_usuario :{
             type: DataTypes.INTEGER.UNSIGNED,
             defaultValue : null
         },
@@ -33,9 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     const Usuario = sequelize.define(alias, cols, config)
 
     Usuario.associate = function(models){
-        Usuario.belongsTo(models.Rol, {
-            as : "Rol",
-            foreignKey : "fk_idrol_usuario"
+        Usuario.belongsTo(models.Cargo, {
+            as : "Cargo",
+            foreignKey : "fk_idcargo_usuario"
         })
     }
 

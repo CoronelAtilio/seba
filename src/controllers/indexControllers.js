@@ -20,9 +20,9 @@ module.exports = {
         try {
             const user = await db.Usuario.findOne({
                 include: [{
-                    model: db.Rol,
-                    as: 'Rol',
-                    attributes: ['permisos']
+                    model: db.Cargo,
+                    as: 'Cargo',
+                    attributes: ['nombre_cargo']
                 }],
                 where: {
                     nombre_usuario: {
@@ -50,7 +50,7 @@ module.exports = {
 
                 req.session.userLogged = {
                     usuario: loginUser,
-                    rol: user.Rol.permisos
+                    rol: user.Cargo.nombre_cargo
                 };
 
                 return res.redirect('/welcome');
@@ -63,14 +63,14 @@ module.exports = {
     bienvenida: async (req, res) => {
         try {
             // Aquí ejecuto actualización necesaria
-            await db.sequelize.query('ANALYZE TABLE all_tables_values;');
+            await db.sequelize.query('ANALYZE TABLE vista_tablas;');
 
-            const tablasCant = await db.Tables_Values.findAll({
+            const tablas = await db.Vista_Tabla.findAll({
                 attributes: [
-                    ['table_name', 'Tablas'], ['table_rows', 'Cantidades']
+                    ['tablas', 'Tablas']
                 ]
             });
-            res.render('index/bienvenida', { tablasCant });
+            res.render('index/bienvenida', { tablas });
 
         } catch (error) {
             console.log(error);
@@ -79,23 +79,23 @@ module.exports = {
     },
     bienvenidaSearch: async (req, res) => {
         try {
-            await db.sequelize.query('ANALYZE TABLE all_tables_values;');
+            await db.sequelize.query('ANALYZE TABLE vista_tablas;');
 
             const search = req.query.search || '';
 
             // Consulta con búsqueda (like)
-            const tablasCant = await db.Tables_Values.findAll({
+            const tablas = await db.Vista_Tabla.findAll({
                 attributes: [
-                    ['table_name', 'Tablas'], ['table_rows', 'Cantidades']
+                    ['tablas', 'Tablas']
                 ],
                 where: {
-                    table_name: {
+                    tablas: {
                         [Op.like]: `%${search}%`
                     }
                 }
             });
 
-            res.render('index/bienvenida', { tablasCant });
+            res.render('index/bienvenida', { tablas });
 
         } catch (error) {
             console.log(error);

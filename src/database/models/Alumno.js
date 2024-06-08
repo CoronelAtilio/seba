@@ -71,15 +71,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "fk_idtutor_alumno"
         })
 
-        Alumno.hasMany(models.Nota, {
-            as: "Nota",
-            foreignKey: "fk_idalumno_nota"
+        Alumno.hasMany(models.Al_Mat_Not_Cur, {
+            as: "Al_Mat_Not_Curs",
+            foreignKey: "fk_idalumno_almatnotcur"
         })
 
-        Alumno.hasMany(models.Alumno_Materia, {
-            as : "Alumno_Materia",
-            foreignKey : "fk_idalumno_alumnomateria"
-        })
     }
 
     return Alumno

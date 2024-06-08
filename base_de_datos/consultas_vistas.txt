@@ -1,0 +1,73 @@
+VISTAS:
+alumnos:
+	-dni_alumno
+	-nombre_alumno
+	-apellido_alumno
+
+	-curso...
+
+//total de 400 alumnos
+select distinct(a.dni_alumno) as dni,a.nombre_alumno as nombre,a.apellido_alumno as apellido,c.anio_curso as año,c.division_curso as division,c.turno_curso as turno 
+from alumnos a 
+inner join al_mat_not_cur amnc 
+on a.idalumno = amnc.fk_idalumno_almatnotcur 
+INNER JOIN cursos c 
+ON c.idcurso = amnc.fk_idcurso_almatnotcur;
+
+Vista:
+
+CREATE VIEW vista_alumnos AS
+SELECT a.dni_alumno,
+       a.nombre_alumno,
+       a.apellido_alumno,
+       c.anio_curso,
+       c.division_curso,
+       c.turno_curso 
+FROM alumnos a 
+INNER JOIN al_mat_not_cur amnc 
+ON a.idalumno = amnc.fk_idalumno_almatnotcur 
+INNER JOIN cursos c 
+ON c.idcurso = amnc.fk_idcurso_almatnotcur;
+
+
+
+Profesores:
+	-dni_profesor
+	-apellido_profesor
+	-nombre_profesor
+	-cargos:
+		-nombre_cargo
+	-situaciones:
+		-condicion
+	-materias:
+		-nombre_materia
+
+
+select distinct(p.dni_profesor),p.apellido_profesor, p.nombre_profesor,c.nombre_cargo,s.condicion,m.nombre_materia 
+FROM profesores p 
+INNER JOIN cargos c 
+ON c.idcargo = p.fk_idcargo_profesor 
+INNER JOIN situaciones s 
+ON s.idsituacion = p.fk_idsituacion_profesor 
+INNER JOIN profesores_materias pm 
+ON pm.fk_idprofesor_profesormateria = p.idprofesor 
+INNER JOIN materias m 
+ON m.idmateria = pm.fk_idmateria_profesormateria;
+
+Vista:
+CREATE VIEW vista_profesores AS
+SELECT DISTINCT p.dni_profesor,
+                p.apellido_profesor,
+                p.nombre_profesor,
+                c.nombre_cargo,
+                s.condicion,
+                m.nombre_materia 
+FROM profesores p 
+INNER JOIN cargos c 
+ON c.idcargo = p.fk_idcargo_profesor 
+INNER JOIN situaciones s 
+ON s.idsituacion = p.fk_idsituacion_profesor 
+INNER JOIN profesores_materias pm 
+ON pm.fk_idprofesor_profesormateria = p.idprofesor 
+INNER JOIN materias m 
+ON m.idmateria = pm.fk_idmateria_profesormateria;

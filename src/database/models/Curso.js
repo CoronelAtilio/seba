@@ -6,8 +6,20 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        tipo: {
-            type: DataTypes.STRING(100),
+        anio_curso: {
+            type: DataTypes.STRING(15),
+            allowNull: false
+        },
+        division_curso: {
+            type: DataTypes.STRING(15),
+            allowNull: false
+        },
+        turno_curso: {
+            type: DataTypes.STRING(15),
+            allowNull: false
+        },
+        ciclo_lectivo: {
+            type: DataTypes.STRING(4),
             allowNull: false
         },
     }
@@ -18,9 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     const Curso = sequelize.define(alias, cols, config)
 
     Curso.associate = function(models){
-        Curso.hasMany(models.Materia, {
-            as : "Materia",
-            foreignKey : "fk_idcurso_materia"
+        Curso.hasMany(models.Al_Mat_Not_Cur, {
+            as : "Al_Mat_Not_Curs",
+            foreignKey : "fk_idcurso_almatnotcur"
         })
     }
 

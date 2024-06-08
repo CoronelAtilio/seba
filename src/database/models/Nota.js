@@ -6,42 +6,22 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        nota1: {
-            type: DataTypes.DECIMAL(2,2),
-            defaultValue : null
-        },
-        nota2: {
-            type: DataTypes.DECIMAL(2,2),
-            defaultValue : null
-        },
-        nota_final: {
-            type: DataTypes.DECIMAL(2,2),
-            defaultValue : null
-        },
-        fk_idalumno_nota :{
-            type: DataTypes.INTEGER.UNSIGNED,
-            defaultValue : null
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        nombre_nota: {
+            type: DataTypes.STRING(15),
+            allowNull: false
         }
     }
     let config = {
         tableName: "notas",
-        timestamps: true
+        timestamps: false
     }
     const Nota = sequelize.define(alias, cols, config)
 
     Nota.associate = function(models){
 
-        Nota.belongsTo(models.Alumno, {
-            as : "Alumno",
-            foreignKey : "fk_idalumno_nota"
+        Nota.hasMany(models.Al_Mat_Not_Cur, {
+            as : "Al_Mat_Not_Curs",
+            foreignKey : "fk_idalumno_almatnotcur"
         })
 
     }

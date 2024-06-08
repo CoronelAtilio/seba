@@ -6,7 +6,7 @@ const path = require('path')
 const apiIndexControllers = require(path.resolve(__dirname,"../../controllers/apis/index.js"));
 
 //RUTAS
-// http://localhost:4000/api/index
+// http://localhost:4000/api/index/alumnos
 router.get('/alumnos',apiIndexControllers.vista_alumnos)
 router.get('/profesores',apiIndexControllers.vista_profesores)
 

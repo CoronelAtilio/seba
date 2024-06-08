@@ -1,0 +1,9 @@
+idprofesor,dni_profesor,email_profesor,celular_profesor,apellido_profesor,nombre_profesor,fk_idcargo_profesor,fk_idsituacion_profesor,createdAt,updatedAt
+1,5108755068523645,cbristoe0@meetup.com,7835101190,Bristoe,Chadd,4,1,2022-09-01,
+2,5048374273840704,fpiercy1@mayoclinic.com,8501145414,Piercy,Filberto,3,1,2020-11-30,2024-06-01
+3,5048375178394861,smartel2@theguardian.com,7903860767,Martel,Shirlee,4,1,2022-05-27,
+4,5108758478675856,vheadingham3@nydailynews.com,5243990508,Headingham,Val,1,2,2021-02-26,2023-12-09
+5,5048377040085305,svelden4@blogs.com,5926657077,Velden,Salome,1,1,2022-12-11,2024-05-03
+6,5108752107581981,cfassmann5@ucla.edu,1711231373,Fassmann,Chandler,2,1,2022-04-14,2024-05-02
+7,5108751952580759,tlomen6@360.cn,8534960301,Lomen,Tabbie,3,3,2022-11-17,2023-05-02
+8,5048374485737094,jbacon7@geocities.com,6409487477,Bacon,Jeanelle,4,1,2022-02-03,2024-02-07

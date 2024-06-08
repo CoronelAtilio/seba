@@ -6,18 +6,26 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
+        fk_idprofesor_profesormateria :{
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
         fk_idmateria_profesormateria :{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        fk_idprofesor_profesormateria :{
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         }
     }
     let config = {
         tableName: "profesores_materias",
-        timestamps: false
+        timestamps: true
     }
     const Profesor_Materia = sequelize.define(alias, cols, config)
 

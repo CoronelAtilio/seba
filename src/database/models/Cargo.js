@@ -19,8 +19,13 @@ module.exports = (sequelize, DataTypes) => {
 
     Cargo.associate = function(models){
         Cargo.hasMany(models.Profesor, {
-            as : "Profesor",
+            as : "Profesores",
             foreignKey : "fk_idcargo_profesor"
+        })
+
+        Cargo.hasMany(models.Usuario, {
+            as : "Usuarios",
+            foreignKey : "fk_idcargo_usuario"
         })
     }
 

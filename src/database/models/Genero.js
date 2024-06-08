@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Genero.associate = function(models){
         Genero.hasMany(models.Alumno, {
-            as : "Alumno",
+            as : "Alumnos",
             foreignKey : "fk_idgenero_alumno"
         })
     }

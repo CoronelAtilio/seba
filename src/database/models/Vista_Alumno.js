@@ -1,21 +1,24 @@
 module.exports = (sequelize, DataTypes) => {
     let alias = "Vista_Alumno"
     let cols = {
-        apellido_alumno: {
-            type: DataTypes.STRING(100)
+        dni_alumno: {
+            type: DataTypes.STRING(15)
         },
         nombre_alumno: {
             type: DataTypes.STRING(100)
         },
-        nombre_tutor: {
+        apellido_alumno: {
             type: DataTypes.STRING(100)
         },
-        apellido_tutor: {
-            type: DataTypes.STRING(100)
-        },
-        celular_tutor: {
+        anio_curso: {
             type: DataTypes.STRING(15)
         },
+        division_curso: {
+            type: DataTypes.STRING(15)
+        },
+        turno_curso: {
+            type: DataTypes.STRING(15)
+        }
     }
     let config = {
         tableName: "vista_alumnos",

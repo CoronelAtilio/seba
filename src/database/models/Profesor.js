@@ -60,11 +60,11 @@ module.exports = (sequelize, DataTypes) => {
 
         Profesor.belongsTo(models.Situacion, {
             as : "Situacion",
-            foreignKey : "fk_situacion_profesor"
+            foreignKey : "fk_idsituacion_profesor"
         })
 
         Profesor.hasMany(models.Profesor_Materia, {
-            as : "Profesor_Materia",
+            as : "Profesores_Materias",
             foreignKey : "fk_idprofesor_profesormateria"
         })
     }

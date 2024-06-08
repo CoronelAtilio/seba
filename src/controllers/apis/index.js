@@ -3,16 +3,18 @@ const sequelize = db.sequelize;
 
 const apiIndexControllers = {
     'vista_alumnos': async (req, res) => {
-        await sequelize.query('ANALYZE TABLE vista_alumnos;');
+        // await sequelize.query('ANALYZE TABLE vista_alumnos;');
         try {
             const alumnos = await db.Vista_Alumno.findAll({
                 attributes: [
-                    'apellido_alumno',
-                    'nombre_alumno',
-                    'nombre_tutor',
-                    'apellido_tutor',
-                    'celular_tutor'
-                ]
+                    ['dni_alumno','dni'],
+                    ['nombre_alumno','nombre'],
+                    ['apellido_alumno','apellido'],
+                    ['anio_curso','año'],
+                    ['division_curso','division'],
+                    ['turno_curso','turno']
+                ],
+                limit: 400
             });
             return res.status(200).json({
                 meta: {
@@ -36,11 +38,12 @@ const apiIndexControllers = {
         try {
             const profesores = await db.Vista_Profesor.findAll({
                 attributes: [
+                    'dni_profesor',
                     'apellido_profesor',
                     'nombre_profesor',
-                    'celular_profesor',
                     'nombre_cargo',
-                    'condicion'
+                    'condicion',
+                    'nombre_materia'
                 ]
             });
             return res.status(200).json({

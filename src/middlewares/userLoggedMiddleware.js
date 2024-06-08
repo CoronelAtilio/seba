@@ -7,9 +7,9 @@ async function userLoggedMiddleware(req, res, next) {
 
             const usuarioCookie = await db.Usuario.findOne({
                 include: [{
-                    model: db.Rol,
-                    as: 'Rol',
-                    attributes: ['permisos']
+                    model: db.Cargo,
+                    as: 'Cargo',
+                    attributes: ['nombre_cargo']
                 }],
                 where: {
                     nombre_usuario: req.cookies.userSession
@@ -19,7 +19,7 @@ async function userLoggedMiddleware(req, res, next) {
             if (usuarioCookie) {
                 req.session.userLogged = {
                     usuario: usuarioCookie.nombre_usuario,
-                    rol: usuarioCookie.Rol.permisos
+                    rol: usuarioCookie.Cargo.nombre_cargo
                 }
             }
         }
