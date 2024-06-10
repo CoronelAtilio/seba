@@ -9,6 +9,7 @@ const apiIndexControllers = require(path.resolve(__dirname,"../../controllers/ap
 // http://localhost:4000/api/index/alumnos
 router.get('/alumnos',apiIndexControllers.vista_alumnos)
 router.get('/profesores',apiIndexControllers.vista_profesores)
+router.get('/usuarios',apiIndexControllers.vista_usuarios)
 
 
 module.exports = router;

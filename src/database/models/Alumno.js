@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(100),
             allowNull: false
         },
-        fecha_nac: {
+        fecha_nac_alumno: {
             type: DataTypes.DATE,
             allowNull: false
         },

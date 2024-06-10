@@ -15,7 +15,10 @@ const userValidationMiddleware = [
         .withMessage('Campo Obligatorio')
         .bail()
         .isLength({ min: 3 })
-        .withMessage('Contraseña inválida')
+        .withMessage('Contraseña inválida'),
+    body('permisos')
+        .notEmpty()
+        .withMessage('Campo Obligatorio'),
 ];
 
 module.exports = userValidationMiddleware;

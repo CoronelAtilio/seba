@@ -2,7 +2,7 @@
     <i class='bx bx-menu'></i>
     <a href="#" class="nav-link"><%= locals.userLogged.usuario %></a>
 
-    <form action="<%= form_action %>" method="get">
+    <form action="<%= form_action %>" method="get" <%= hidden %>>
         <div class="form-input">
             <input id="searchInput" type="search" placeholder="Buscar..." name="search">
             <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>

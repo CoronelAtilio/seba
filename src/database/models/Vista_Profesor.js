@@ -1,22 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
     let alias = "Vista_Profesor"
     let cols = {
-        dni_profesor: {
+        DNI: {
             type: DataTypes.STRING(15)
         },
-        apellido_profesor: {
+        Apellido: {
             type: DataTypes.STRING(100)
         },
-        nombre_profesor: {
+        Nombre: {
             type: DataTypes.STRING(100)
         },
-        nombre_cargo: {
-            type: DataTypes.STRING(45)
-        },
-        condicion: {
-            type: DataTypes.STRING(15)
-        },
-        nombre_materia: {
+        Correo: {
             type: DataTypes.STRING(100)
         },
     }

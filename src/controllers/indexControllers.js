@@ -1,6 +1,7 @@
 const db = require('../database/models');
 const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
+const bcrypt = require("bcryptjs");
 
 module.exports = {
     acceso: (req, res) => {
@@ -31,12 +32,13 @@ module.exports = {
                 }
             });
 
+            const passwordMatch = await bcrypt.compare(loginPass, user.password_usuario);
             if (!user) {
                 return res.render("index/acceso", {
                     errors: { loginUser: { msg: 'Usuario no encontrado' } },
                     old: req.body,
                 });
-            } else if (user.password_usuario != loginPass) {
+            } else if (!passwordMatch) {
                 return res.render("index/acceso", {
                     errors: { loginPass: { msg: 'Contraseña incorrecta' } },
                     old: req.body,

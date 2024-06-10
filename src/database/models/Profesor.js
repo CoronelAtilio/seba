@@ -44,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
         updatedAt: {
             type: DataTypes.DATE,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        fecha_nac_profesor: {
+            type: DataTypes.DATE,
+            allowNull: false
         }
     }
     let config = {

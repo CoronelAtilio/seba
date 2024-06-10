@@ -11,7 +11,7 @@
         <!-- CONTENT -->
         <section id="content">
             <!-- NAVBAR -->
-            <%- include('../partials/header.ejs', {form_action: "#" }) %>
+            <%- include('../partials/header.ejs', {form_action: "#" , hidden:'hidden'}) %>
                 <!-- MAIN -->
                 <main>
                     <ul class="nav-links container">
@@ -23,16 +23,18 @@
 
                     <div class="container">
                         <!-- Formulario 1 -->
-                        <form id="form1" class="form-content" style="display:none;"
-                            action="/administrador/crear/usuario" method="post">
+                        <form id="form1" class="form-content" style="display:none;" action="/administrador/usuario"
+                            method="post">
                             <div class="form first">
                                 <div class="details personal">
-                                    <span class="title">Datos para Crear Usuario</span>
+                                    <span class="title">Crear Usuario</span>
                                     <div class="fields">
                                         <div class="input-field">
                                             <label for="nombre_usuario">Usuario</label>
                                             <input type="text" placeholder="Ingresa nombre de Usuario"
-                                                name="nombre_usuario" value="<%= locals.old1 && old1.nombre_usuario ? old1.nombre_usuario : '' %>" required>
+                                                name="nombre_usuario"
+                                                value="<%= locals.old1 && old1.nombre_usuario ? old1.nombre_usuario : '' %>"
+                                                required>
                                         </div>
                                         <!--comentario para los errores-->
                                         <% if (locals.errors1 && locals.errors1.nombre_usuario) { %>
@@ -41,35 +43,36 @@
                                             </div>
                                             <% } %>
 
-                                        <div class="input-field">
-                                            <label for="password_usuario">Contraseña</label>
-                                            <input type="text" placeholder="Ingresa tu Contraseña"
-                                                name="password_usuario" required>
-                                        </div>
-
-                                        <div class="input-field">
-                                            <label for="password_usuario2">Confirma Contraseña</label>
-                                            <input type="text" placeholder="Repite tu Contraseña"
-                                                name="password_usuario2" required>
-                                        </div>
-
-                                        <!--comentario para los errores-->
-                                        <% if (locals.errors1 && locals.errors1.password_usuario2) { %>
-                                            <div style="color: red;">
-                                                <%= locals.errors1.password_usuario2.msg %>
-                                            </div>
-                                            <% } %>
+                                                <div class="input-field">
+                                                    <label for="password_usuario">Contraseña</label>
+                                                    <input type="password" placeholder="Ingresa tu Contraseña"
+                                                        name="password_usuario" required>
+                                                </div>
 
                                                 <div class="input-field">
-                                                    <label for="permisos">Rol</label>
-                                                    <select name="permisos" required>
-                                                        <option disabled selected>Selecciona Rol de Usuario</option>
-                                                        <option>Administrador</option>
-                                                        <option>Docente</option>
-                                                        <option>Director</option>
-                                                        <option>Preceptor</option>
-                                                    </select>
+                                                    <label for="password_usuario2">Confirma Contraseña</label>
+                                                    <input type="password" placeholder="Repite tu Contraseña"
+                                                        name="password_usuario2" required>
                                                 </div>
+
+                                                <!--comentario para los errores-->
+                                                <% if (locals.errors1 && locals.errors1.password_usuario2) { %>
+                                                    <div style="color: red;">
+                                                        <%= locals.errors1.password_usuario2.msg %>
+                                                    </div>
+                                                    <% } %>
+
+                                                        <div class="input-field">
+                                                            <label for="permisos">Rol</label>
+                                                            <select name="permisos" required>
+                                                                <option disabled selected>Selecciona Rol de Usuario
+                                                                </option>
+                                                                <option>Tecnico</option>
+                                                                <option>Docente</option>
+                                                                <option>Director</option>
+                                                                <option>Preceptor</option>
+                                                            </select>
+                                                        </div>
 
                                     </div>
                                 </div>
@@ -81,68 +84,91 @@
                         </form>
 
                         <!-- Formulario 2 -->
-                        <form id="form2" class="form-content" style="display:none;" action="#">
+                        <form id="form2" class="form-content" style="display:none;"
+                            action="/administrador/usuario/docente" method="post">
                             <div class="form first">
                                 <div class="details personal">
-                                    <span class="title">Datos para Registrar</span>
+                                    <span class="title">Registrar Docente</span>
                                     <div class="fields">
                                         <div class="input-field">
-                                            <label>Apellido/s</label>
-                                            <input type="text" placeholder="Ingresa tu/s apellido/s" required>
+                                            <label for="apellido_profesor">Apellido/s</label>
+                                            <input name="apellido_profesor" type="text"
+                                                placeholder="Ingresa tu/s apellido/s" value="<%= locals.old2 && old2.apellido_profesor ? old2.apellido_profesor : '' %>" required>
                                         </div>
                                         <div class="input-field">
-                                            <label>Nombre/s</label>
-                                            <input type="text" placeholder="Ingresa tu/s nombre/s" required>
+                                            <label for="nombre_profesor">Nombre/s</label>
+                                            <input name="nombre_profesor" type="text"
+                                                placeholder="Ingresa tu/s nombre/s" value="<%= locals.old2 && old2.nombre_profesor ? old2.nombre_profesor : '' %>" required>
                                         </div>
                                         <div class="input-field">
-                                            <label>Fecha de Nacimiento</label>
-                                            <input type="date" placeholder="Ingresa tu fecha de nacimiento" required>
+                                            <label for="fecha_nac_profesor">Fecha de Nacimiento</label>
+                                            <input name="fecha_nac_profesor" type="date"
+                                                placeholder="Ingresa tu fecha de nacimiento" value="<%= locals.old2 && old2.fecha_nac_profesor ? old2.fecha_nac_profesor : '' %>" required>
                                         </div>
                                         <div class="input-field">
-                                            <label>Email</label>
-                                            <input type="text" placeholder="algo@algo.com" required>
+                                            <label for="email_profesor">Email</label>
+                                            <input name="email_profesor" type="text" placeholder="algo@algo.com"
+                                                value="<%= locals.old2 && old2.email_profesor ? old2.email_profesor : '' %>"
+                                                required>
                                         </div>
-                                        <div class="input-field">
-                                            <label>Celular</label>
-                                            <input type="text" placeholder="3855234345" required>
-                                        </div>
-                                        <div class="input-field">
-                                            <label>Género</label>
-                                            <select required>
-                                                <option disabled selected>Selecciona Género</option>
-                                                <option>Hombre</option>
-                                                <option>Mujer</option>
-                                                <option>Otro</option>
-                                            </select>
-                                        </div>
-                                        <div class="input-field">
-                                            <label>Cargo</label>
-                                            <select required>
-                                                <option disabled selected>Selecciona Cargo</option>
-                                                <option>Director</option>
-                                                <option>Preceptor</option>
-                                                <option>Docente</option>
-                                                <option>Técnico</option>
-                                            </select>
-                                        </div>
-                                        <div class="input-field">
-                                            <label>DNI</label>
-                                            <input type="text" placeholder="34094325" required>
-                                        </div>
-                                        <div class="input-field">
-                                            <label>Situación</label>
-                                            <select required>
-                                                <option disabled selected>Selecciona Situación</option>
-                                                <option>Suplente</option>
-                                                <option>Titular</option>
-                                                <option>Interino</option>
-                                                <option>Provisional</option>
-                                                <option>Adjunto</option>
-                                                <option>Jornada Parcial</option>
-                                                <option>Jornada Completa</option>
-                                                <option>Sustituto</option>
-                                            </select>
-                                        </div>
+
+                                        <!--comentario para los errores-->
+                                        <% if (locals.errors2 && locals.errors2.email_profesor) { %>
+                                            <div style="color: red;">
+                                                <%= locals.errors2.email_profesor.msg %>
+                                            </div>
+                                            <% } %>
+
+                                                <div class="input-field">
+                                                    <label for="celular_profesor">Celular</label>
+                                                    <input name="celular_profesor" type="text" placeholder="3855234345"
+                                                        value="<%= locals.old2 && old2.celular_profesor ? old2.celular_profesor : '' %>"
+                                                        required>
+                                                </div>
+
+                                                <!--comentario para los errores-->
+                                                <% if (locals.errors2 && locals.errors2.celular_profesor) { %>
+                                                    <div style="color: red;">
+                                                        <%= locals.errors2.celular_profesor.msg %>
+                                                    </div>
+                                                    <% } %>
+
+
+                                                        <div class="input-field">
+                                                            <label for="nombre_cargo">Cargo</label>
+                                                            <select name="nombre_cargo" required>
+                                                                <option disabled selected>Selecciona Cargo</option>
+                                                                <option>Técnico</option>
+                                                                <option>Director</option>
+                                                                <option>Preceptor</option>
+                                                                <option>Docente</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="input-field">
+                                                            <label for="dni_profesor">DNI</label>
+                                                            <input name="dni_profesor" type="text"
+                                                                placeholder="34094325"
+                                                                value="<%= locals.old2 && old2.dni_profesor ? old2.dni_profesor : '' %>"
+                                                                required>
+                                                        </div>
+
+                                                        <!--comentario para los errores-->
+                                                        <% if (locals.errors2 && locals.errors2.dni_profesor) { %>
+                                                            <div style="color: red;">
+                                                                <%= locals.errors2.dni_profesor.msg %>
+                                                            </div>
+                                                            <% } %>
+
+                                                                <div class="input-field">
+                                                                    <label for="condicion">Situación</label>
+                                                                    <select name="condicion" required>
+                                                                        <option disabled selected>Selecciona Situación
+                                                                        </option>
+                                                                        <option>Titular</option>
+                                                                        <option>Suplente</option>
+                                                                        <option>Interino</option>
+                                                                    </select>
+                                                                </div>
                                     </div>
                                 </div>
                                 <button class="nextBtn" type="submit">
