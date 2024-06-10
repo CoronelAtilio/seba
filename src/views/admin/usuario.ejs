@@ -17,8 +17,10 @@
                     <ul class="nav-links container">
                         <li class="upward"><a href="#" data-form="form1">Crear Usuario</a></li>
                         <li class="center"><a href="#" data-form="form2">Registrar Docente</a></li>
-                        <li class="forward"><a href="#" data-form="form3">Modificar Usuario</a></li>
-                        <li class="forward"><a href="#" data-form="form4">Modificar docente</a></li>
+                        <li class="forward"><a href="#" data-form="form3">Registrar Alumno</a></li>
+                        <li class="upward"><a href="#" data-form="form4">Modificar Usuario</a></li>
+                        <li class="center"><a href="#" data-form="form5">Modificar docente</a></li>
+                        <li class="forward"><a href="#" data-form="form6">Modificar Alumno</a></li>
                     </ul>
 
                     <div class="container">
@@ -93,17 +95,23 @@
                                         <div class="input-field">
                                             <label for="apellido_profesor">Apellido/s</label>
                                             <input name="apellido_profesor" type="text"
-                                                placeholder="Ingresa tu/s apellido/s" value="<%= locals.old2 && old2.apellido_profesor ? old2.apellido_profesor : '' %>" required>
+                                                placeholder="Ingresa tu/s apellido/s"
+                                                value="<%= locals.old2 && old2.apellido_profesor ? old2.apellido_profesor : '' %>"
+                                                required>
                                         </div>
                                         <div class="input-field">
                                             <label for="nombre_profesor">Nombre/s</label>
                                             <input name="nombre_profesor" type="text"
-                                                placeholder="Ingresa tu/s nombre/s" value="<%= locals.old2 && old2.nombre_profesor ? old2.nombre_profesor : '' %>" required>
+                                                placeholder="Ingresa tu/s nombre/s"
+                                                value="<%= locals.old2 && old2.nombre_profesor ? old2.nombre_profesor : '' %>"
+                                                required>
                                         </div>
                                         <div class="input-field">
                                             <label for="fecha_nac_profesor">Fecha de Nacimiento</label>
                                             <input name="fecha_nac_profesor" type="date"
-                                                placeholder="Ingresa tu fecha de nacimiento" value="<%= locals.old2 && old2.fecha_nac_profesor ? old2.fecha_nac_profesor : '' %>" required>
+                                                placeholder="Ingresa tu fecha de nacimiento"
+                                                value="<%= locals.old2 && old2.fecha_nac_profesor ? old2.fecha_nac_profesor : '' %>"
+                                                required>
                                         </div>
                                         <div class="input-field">
                                             <label for="email_profesor">Email</label>
@@ -179,7 +187,175 @@
                         </form>
 
                         <!-- Formulario 3 -->
-                        <form id="form3" class="form-content" style="display:none;" action="#">
+                        <form id="form3" class="form-content" style="display:none;"
+                            action="/administrador/usuario/alumno" method="post">
+                            <div class="form first">
+                                <div class="details personal">
+                                    <span class="title">Registrar Alumno</span>
+                                    <div class="fields">
+                                        <div class="input-field">
+                                            <label for="apellido_profesor">Apellido/s</label>
+                                            <input name="apellido_profesor" type="text"
+                                                placeholder="Ingresa tu/s apellido/s"
+                                                value="<%= locals.old3 && old3.apellido_alumno ? old3.apellido_alumno : '' %>"
+                                                required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label for="nombre_alumno">Nombre/s</label>
+                                            <input name="nombre_alumno" type="text"
+                                                placeholder="Ingresa tu/s nombre/s"
+                                                value="<%= locals.old3 && old3.nombre_alumno ? old3.nombre_alumno : '' %>"
+                                                required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label for="fecha_nac_alumno">Fecha de Nacimiento</label>
+                                            <input name="fecha_nac_alumno" type="date"
+                                                placeholder="Ingresa tu fecha de nacimiento"
+                                                value="<%= locals.old3 && old3.fecha_nac_alumno ? old3.fecha_nac_alumno : '' %>"
+                                                required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label for="email_alumno">Email</label>
+                                            <input name="email_alumno" type="text" placeholder="algo@algo.com"
+                                                value="<%= locals.old3 && old3.email_alumno ? old3.email_alumno : '' %>"
+                                                required>
+                                        </div>
+
+                                        <!--comentario para los errores-->
+                                        <% if (locals.errors3 && locals.errors3.email_alumno) { %>
+                                            <div style="color: red;">
+                                                <%= locals.errors3.email_alumno.msg %>
+                                            </div>
+                                            <% } %>
+
+                                                <div class="input-field">
+                                                    <label for="celular_alumno">Celular</label>
+                                                    <input name="celular_alumno" type="text" placeholder="3855234345"
+                                                        value="<%= locals.old3 && old3.celular_alumno ? old3.celular_alumno : '' %>"
+                                                        >
+                                                </div>
+
+                                                <!--comentario para los errores-->
+                                                <% if (locals.errors3 && locals.errors3.celular_alumno) { %>
+                                                    <div style="color: red;">
+                                                        <%= locals.errors3.celular_alumno.msg %>
+                                                    </div>
+                                                    <% } %>
+
+
+                                                        <div class="input-field">
+                                                            <label for="tipo">Género</label>
+                                                            <select name="tipo" required>
+                                                                <option disabled selected>Selecciona Género</option>
+                                                                <option>Masculino</option>
+                                                                <option>Femenino</option>
+                                                                <option>Otro</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="input-field">
+                                                            <label for="dni_alumno">DNI Alumno</label>
+                                                            <input name="dni_alumno" type="text"
+                                                                placeholder="34094325"
+                                                                value="<%= locals.old3 && old3.dni_alumno ? old3.dni_alumno : '' %>"
+                                                                required>
+                                                        </div>
+
+                                                        <!--comentario para los errores-->
+                                                        <% if (locals.errors3 && locals.errors3.dni_alumno) { %>
+                                                            <div style="color: red;">
+                                                                <%= locals.errors3.dni_alumno.msg %>
+                                                            </div>
+                                                            <% } %>
+                                                            <div class="input-field">
+                                                                <label for="dni_tutor">DNI Tutor</label>
+                                                                <input name="dni_tutor" type="text"
+                                                                    placeholder="34094325"
+                                                                    value="<%= locals.old3 && old3.dni_tutor ? old3.dni_tutor : '' %>"
+                                                                    required>
+                                                            </div>
+                                    </div>
+                                </div>
+                                <button class="nextBtn" type="submit">
+                                    <span class="btnText">Enviar</span>
+                                    <i class="uil uil-navigator"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Formulario 4 -->
+                        <form id="form4" class="form-content" style="display:none;" action="#">
+                            <div class="form first">
+                                <div class="details personal">
+                                    <span class="title">Datos para Modificar Docente</span>
+                                    <div class="fields">
+                                        <div class="input-field">
+                                            <label>Apellido/s</label>
+                                            <input type="text" placeholder="Ingresa tu/s apellido/s" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Nombre/s</label>
+                                            <input type="text" placeholder="Ingresa tu/s nombre/s" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Fecha de Nacimiento</label>
+                                            <input type="date" placeholder="Ingresa tu fecha de nacimiento" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Email</label>
+                                            <input type="text" placeholder="algo@algo.com" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Celular</label>
+                                            <input type="text" placeholder="3855234345" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Género</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Género</option>
+                                                <option>Hombre</option>
+                                                <option>Mujer</option>
+                                                <option>Otro</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Cargo</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Cargo</option>
+                                                <option>Director</option>
+                                                <option>Preceptor</option>
+                                                <option>Docente</option>
+                                                <option>Técnico</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>DNI</label>
+                                            <input type="text" placeholder="34094325" required>
+                                        </div>
+                                        <div class="input-field">
+                                            <label>Situación</label>
+                                            <select required>
+                                                <option disabled selected>Selecciona Situación</option>
+                                                <option>Suplente</option>
+                                                <option>Titular</option>
+                                                <option>Interino</option>
+                                                <option>Provisional</option>
+                                                <option>Adjunto</option>
+                                                <option>Jornada Parcial</option>
+                                                <option>Jornada Completa</option>
+                                                <option>Sustituto</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="nextBtn" type="submit">
+                                    <span class="btnText">Enviar</span>
+                                    <i class="uil uil-navigator"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Formulario 5 -->
+                        <form id="form5" class="form-content" style="display:none;" action="#">
                             <div class="form first">
                                 <div class="details personal">
                                     <span class="title">Datos para Modificar Usuario</span>
@@ -250,11 +426,11 @@
                             </div>
                         </form>
 
-                        <!-- Formulario 4 -->
-                        <form id="form4" class="form-content" style="display:none;" action="#">
+                        <!-- Formulario 6 -->
+                        <form id="form6" class="form-content" style="display:none;" action="#">
                             <div class="form first">
                                 <div class="details personal">
-                                    <span class="title">Datos para Modificar Docente</span>
+                                    <span class="title">Datos para Modificar Usuario</span>
                                     <div class="fields">
                                         <div class="input-field">
                                             <label>Apellido/s</label>
