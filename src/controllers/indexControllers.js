@@ -27,39 +27,49 @@ module.exports = {
                 }],
                 where: {
                     nombre_usuario: {
-                        [Op.like]: `${loginUser}`
+                        [Op.like]: loginUser // No es necesario el `${}`
                     }
                 }
             });
 
-            const passwordMatch = await bcrypt.compare(loginPass, user.password_usuario);
             if (!user) {
                 return res.render("index/acceso", {
                     errors: { loginUser: { msg: 'Usuario no encontrado' } },
                     old: req.body,
                 });
-            } else if (!passwordMatch) {
+            }
+
+            const passwordMatch = await bcrypt.compare(loginPass, user.password_usuario);
+
+            if (!passwordMatch) {
                 return res.render("index/acceso", {
                     errors: { loginPass: { msg: 'Contraseña incorrecta' } },
                     old: req.body,
                 });
-            } else {
-                if (rememberMe) {
-                    res.cookie('userSession', loginUser, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
-                }else{
-                    res.cookie('userSession', loginUser, { httpOnly: true });
-                }
-
-                req.session.userLogged = {
-                    usuario: loginUser,
-                    rol: user.Cargo.nombre_cargo
-                };
-
-                return res.redirect('/welcome');
             }
+
+            // Configuración de la cookie
+            const cookieOptions = {
+                httpOnly: true,
+                maxAge: rememberMe ? 24 * 60 * 60 * 1000 : undefined // 1 día en milisegundos si rememberMe es true
+            };
+            res.cookie('userSession', loginUser, cookieOptions);
+
+            // Configuración de la sesión
+            req.session.userLogged = {
+                usuario: loginUser,
+                rol: user.Cargo.nombre_cargo
+            };
+
+            return res.redirect('/welcome');
+
         } catch (error) {
-            console.log(error.message);
-            res.send(error.message);
+            console.error('Error en la verificación de acceso:', error);
+            // Respuesta genérica para no revelar detalles del error al usuario
+            return res.status(500).render("index/acceso", {
+                errors: { general: { msg: 'Ocurrió un error, por favor intenta nuevamente.' } },
+                old: req.body,
+            });
         }
     },
     bienvenida: async (req, res) => {
