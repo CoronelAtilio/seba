@@ -75,7 +75,7 @@ module.exports = {
     bienvenida: async (req, res) => {
         try {
             // Aquí ejecuto actualización necesaria
-            await db.sequelize.query('ANALYZE TABLE vista_tablas;');
+            // await db.sequelize.query('ANALYZE TABLE vista_tablas;');
 
             const tablas = await db.Vista_Tabla.findAll({
                 attributes: [
