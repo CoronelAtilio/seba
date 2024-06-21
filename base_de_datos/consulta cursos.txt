@@ -1,0 +1,40 @@
+////Tabla para ver todos los alumnos del curso (nombres, etc)
+
+
+SELECT
+    c.idcurso,
+    c.anio_curso,
+    c.division_curso,
+    c.turno_curso,
+    c.ciclo_lectivo,
+    GROUP_CONCAT(DISTINCT CONCAT(a.apellido_alumno, ', ', a.nombre_alumno) ORDER BY a.apellido_alumno SEPARATOR '; ') AS alumnos
+FROM
+    cursos c
+LEFT JOIN
+    al_mat_not_cur amnc ON c.idcurso = amnc.fk_idcurso_almatnotcur
+LEFT JOIN
+    alumnos a ON amnc.fk_idalumno_almatnotcur = a.idalumno
+GROUP BY
+    c.idcurso
+ORDER BY
+    c.anio_curso, c.division_curso;
+
+
+
+
+
+///tabla para traer todos los cursos con sus respectivas cantidad de alumnos
+SELECT
+    c.anio_curso,
+    c.division_curso,
+    COUNT(DISTINCT a.idalumno) AS cantidad_alumnos
+FROM
+    cursos c
+LEFT JOIN
+    al_mat_not_cur amnc ON c.idcurso = amnc.fk_idcurso_almatnotcur
+LEFT JOIN
+    alumnos a ON amnc.fk_idalumno_almatnotcur = a.idalumno
+GROUP BY
+    c.idcurso, c.anio_curso, c.division_curso
+ORDER BY
+    c.anio_curso, c.division_curso;

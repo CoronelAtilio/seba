@@ -1,0 +1,40 @@
+///Notas ordenadas sin repetir alumnos
+SELECT 
+    a.idalumno,
+    a.nombre_alumno, 
+    a.apellido_alumno,
+    m.nombre_materia,
+    GROUP_CONCAT(CONCAT(n.nombre_nota, ':', amnc.valor_nota) ORDER BY n.idnota SEPARATOR ', ') AS notas
+FROM 
+    alumnos a
+JOIN 
+    al_mat_not_cur amnc ON a.idalumno = amnc.fk_idalumno_almatnotcur
+JOIN 
+    materias m ON m.idmateria = amnc.fk_idmateria_almatnotcur
+JOIN 
+    notas n ON n.idnota = amnc.fk_idnota_almatnotcur
+GROUP BY 
+    a.idalumno, m.nombre_materia
+ORDER BY 
+    a.idalumno;
+
+
+
+///notas donde se repite muchas veces el alumno
+SELECT 
+    a.nombre_alumno, 
+    a.apellido_alumno, 
+    m.nombre_materia, 
+    n.nombre_nota, 
+    amnc.valor_nota
+FROM 
+    alumnos a
+JOIN 
+    al_mat_not_cur amnc ON a.idalumno = amnc.fk_idalumno_almatnotcur
+JOIN 
+    materias m ON m.idmateria = amnc.fk_idmateria_almatnotcur
+JOIN 
+    notas n ON n.idnota = amnc.fk_idnota_almatnotcur
+ORDER BY 
+    a.idalumno, 
+    n.idnota;

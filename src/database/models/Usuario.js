@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(100),
             allowNull: false
         },
-        fk_idcargo_usuario :{
+        fk_idcargo_usuario: {
             type: DataTypes.INTEGER.UNSIGNED,
-            defaultValue : null
+            defaultValue: null
         },
         createdAt: {
             type: DataTypes.DATE,
@@ -25,19 +25,29 @@ module.exports = (sequelize, DataTypes) => {
         updatedAt: {
             type: DataTypes.DATE,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        fk_idprofesor_usuario: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: null
         }
     }
     let config = {
-        tableName: "usuarios"
+        tableName: "usuarios",
+        timestamps: true 
     }
     const Usuario = sequelize.define(alias, cols, config)
 
     Usuario.associate = function(models){
         Usuario.belongsTo(models.Cargo, {
-            as : "Cargo",
-            foreignKey : "fk_idcargo_usuario"
+            as: "Cargo",
+            foreignKey: "fk_idcargo_usuario"
+        })
+
+        Usuario.belongsTo(models.Profesor, {
+            as: "Profesor",
+            foreignKey: "fk_idprofesor_usuario"
         })
     }
 
     return Usuario
-    }
+}

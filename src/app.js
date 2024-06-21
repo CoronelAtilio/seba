@@ -52,14 +52,14 @@ const notLoggedMiddleware = require(path.resolve(__dirname,'./middlewares/notLog
 /*ROUTES*/
 const rutasAdmin = require(path.resolve(__dirname, "./routes/admin.routes"));
 const rutasPreceptor = require(path.resolve(__dirname, "./routes/preceptor.routes"));
-const rutasDocente = require(path.resolve(__dirname, "./routes/docente.routes"));
+const rutascurso = require(path.resolve(__dirname, "./routes/curso.routes"));
 const rutasDirectivo = require(path.resolve(__dirname, "./routes/directivo.routes"));
 const rutasIndex = require(path.resolve(__dirname, "./routes/main.routes"));
 
 /*ENTRY POINTS*/
 app.use("/administrador",notLoggedMiddleware, rutasAdmin);
 app.use("/preceptor",notLoggedMiddleware, rutasPreceptor);
-app.use("/docente",notLoggedMiddleware, rutasDocente);
+app.use("/curso",notLoggedMiddleware, rutascurso);
 app.use("/directivo",notLoggedMiddleware, rutasDirectivo);
 app.use("/", rutasIndex);
 

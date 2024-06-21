@@ -1,5 +1,5 @@
 const db = require('../database/models');
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const { validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
 
@@ -20,6 +20,7 @@ module.exports = {
 
         try {
             const user = await db.Usuario.findOne({
+                attributes: ['nombre_usuario', 'fk_idprofesor_usuario', 'password_usuario'],
                 include: [{
                     model: db.Cargo,
                     as: 'Cargo',
@@ -27,7 +28,7 @@ module.exports = {
                 }],
                 where: {
                     nombre_usuario: {
-                        [Op.like]: loginUser // No es necesario el `${}`
+                        [Op.like]: loginUser
                     }
                 }
             });
@@ -55,10 +56,27 @@ module.exports = {
             };
             res.cookie('userSession', loginUser, cookieOptions);
 
+            //Busco materia
+            let materia = await db.Profesor_Materia.findAll({
+                include: [{
+                    model: db.Materia,
+                    as: 'Materia',
+                    attributes: ['nombre_materia']
+                }],
+                where: {
+                    fk_idprofesor_profesormateria: user.fk_idprofesor_usuario
+                }
+            })
+            let materias = []
+            materia.forEach(profesorMateria => {
+                materias.push(profesorMateria.dataValues.Materia.dataValues.nombre_materia);
+            });
+
             // Configuración de la sesión
             req.session.userLogged = {
                 usuario: loginUser,
-                rol: user.Cargo.nombre_cargo
+                rol: user.Cargo.nombre_cargo,
+                materias
             };
 
             return res.redirect('/welcome');
