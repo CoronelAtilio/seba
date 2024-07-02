@@ -19,6 +19,9 @@ const userValidationMiddleware = [
     body('permisos')
         .notEmpty()
         .withMessage('Campo Obligatorio'),
+    body('dni_profesor')
+        .notEmpty()
+        .withMessage('Campo Obligatorio'),
 ];
 
 module.exports = userValidationMiddleware;

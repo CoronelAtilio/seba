@@ -11,7 +11,7 @@ module.exports = {
         try {
             const errors = validationResult(req);
             let errorsObj = errors.mapped();
-            const { nombre_usuario, password_usuario, password_usuario2, permisos } = req.body;
+            const { nombre_usuario, password_usuario, password_usuario2, permisos, dni_profesor } = req.body;
 
             // Verificación de contraseñas
             if (password_usuario !== password_usuario2) {
@@ -27,6 +27,14 @@ module.exports = {
                 errorsObj.nombre_usuario = { msg: 'Este usuario ya Existe' };
             }
 
+            // Verificación de existencia de profesoor
+            const profesorBuscado = await db.Profesor.findOne({
+                where: { dni_profesor }
+            });
+
+            if (!profesorBuscado) {
+                errorsObj.dni_profesor = { msg: 'Este Docente no existe en la BD' };
+            }
             // Retorno de errores si existen
             if (Object.keys(errorsObj).length > 0) {
                 return res.render('admin/usuario', {
@@ -51,11 +59,11 @@ module.exports = {
                     old1: req.body,
                 });
             }
-
             await db.Usuario.create({
                 password_usuario: hashedPassword,
                 nombre_usuario,
-                fk_idcargo_usuario: cargo.idcargo
+                fk_idcargo_usuario: cargo.idcargo,
+                fk_idprofesor_usuario: profesorBuscado.idprofesor
             });
 
             // Redirección tras la creación exitosa
@@ -75,12 +83,12 @@ module.exports = {
                     old2: req.body,
                 });
             }
-
-            let { apellido_profesor, nombre_profesor, fecha_nac_profesor, email_profesor, celular_profesor, nombre_cargo, dni_profesor, condicion } = req.body;
+    
+            let { apellido_profesor, nombre_profesor, fecha_nac_profesor, email_profesor, celular_profesor, nombre_cargo, dni_profesor, condicion, nombre_materia } = req.body;
             email_profesor = email_profesor.toLowerCase();
             let errorsObj = {};
-
-            const docente = await db.Profesor.findOne({
+    
+            const docenteExistente = await db.Profesor.findOne({
                 attributes: ['dni_profesor', 'email_profesor', 'celular_profesor'],
                 where: {
                     [Op.or]: [
@@ -90,41 +98,36 @@ module.exports = {
                     ]
                 }
             });
-            //Verifico campos unicos
-            if (docente) {
-                if (docente.dni_profesor === dni_profesor) {
+    
+            // Verificar campos únicos
+            if (docenteExistente) {
+                if (docenteExistente.dni_profesor === dni_profesor) {
                     errorsObj.dni_profesor = { msg: 'Este DNI ya existe' };
                 }
-                if (docente.email_profesor === email_profesor) {
+                if (docenteExistente.email_profesor === email_profesor) {
                     errorsObj.email_profesor = { msg: 'Este Email ya Existe' };
                 }
-                if (docente.celular_profesor === celular_profesor) {
+                if (docenteExistente.celular_profesor === celular_profesor) {
                     errorsObj.celular_profesor = { msg: 'Este Celular ya Existe' };
                 }
             }
-
+    
             if (Object.keys(errorsObj).length > 0) {
                 return res.render('admin/usuario', {
                     errors2: errorsObj,
                     old2: req.body,
                 });
             }
-
-
-
-            // Promesas para buscar cargo y situación
-            const cargoPromise = db.Cargo.findOne({
-                where: { nombre_cargo }
-            });
-
-            const situacionPromise = db.Situacion.findOne({
-                where: { condicion: condicion }
-            });
-
-            // Esperar a que ambas promesas se resuelvan
-            const [cargo, situacion] = await Promise.all([cargoPromise, situacionPromise]);
-
-            // Verificación de existencia de cargo y situación
+    
+            // Promesas para buscar cargo, situación y materia
+            const cargoPromise = db.Cargo.findOne({ where: { nombre_cargo } });
+            const situacionPromise = db.Situacion.findOne({ where: { condicion: condicion } });
+            const materiaPromise = db.Materia.findOne({ where: { nombre_materia } });
+    
+            // Esperar a que todas las promesas se resuelvan
+            const [cargo, situacion, materia] = await Promise.all([cargoPromise, situacionPromise, materiaPromise]);
+    
+            // Verificación de existencia de cargo, situación y materia
             if (!cargo) {
                 errorsObj.nombre_cargo = { msg: 'Cargo no encontrado' };
                 return res.render('admin/usuario', {
@@ -132,7 +135,7 @@ module.exports = {
                     old2: req.body,
                 });
             }
-
+    
             if (!situacion) {
                 errorsObj.condicion = { msg: 'Situacion no encontrada' };
                 return res.render('admin/usuario', {
@@ -140,9 +143,17 @@ module.exports = {
                     old2: req.body,
                 });
             }
-
-            // Crear el profesor
-            await db.Profesor.create({
+    
+            if (!materia) {
+                errorsObj.nombre_materia = { msg: 'Materia no encontrada' };
+                return res.render('admin/usuario', {
+                    errors2: errorsObj,
+                    old2: req.body,
+                });
+            }
+    
+            // Crear el profesor y obtener el nuevo ID
+            const nuevoDocente = await db.Profesor.create({
                 apellido_profesor,
                 nombre_profesor,
                 fecha_nac_profesor,
@@ -152,10 +163,16 @@ module.exports = {
                 fk_idcargo_profesor: cargo.idcargo,
                 fk_idsituacion_profesor: situacion.idsituacion
             });
-
+    
+            // Crear la relación en la tabla Profesor_Materia
+            await db.Profesor_Materia.create({
+                fk_idprofesor_profesormateria: nuevoDocente.idprofesor,
+                fk_idmateria_profesormateria: materia.idmateria
+            });
+    
             // Redirección tras la creación exitosa
             res.redirect('/administrador/usuario');
-
+    
         } catch (error) {
             console.log(error.message);
             res.send(error.message);

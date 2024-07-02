@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     let config = {
-        tableName: "materias"
+        tableName: "materias",
+        timestamps: false
     }
     const Materia = sequelize.define(alias, cols, config)
 
