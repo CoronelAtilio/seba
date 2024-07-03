@@ -25,4 +25,19 @@ router.post('/usuario/docente',docenteValidationMiddleware,adminControllers.crea
 // http://localhost:4000/administrador/usuario/alumno
 router.post('/usuario/alumno',alu_tutValidationMiddleware,adminControllers.crear_alu_tut)
 
+//Modificar
+// http://localhost:4000/administrador/usuario/modificar
+router.get('/usuario/modificar',adminControllers.modificarUser)
+
+
+//Eliminar
+// http://localhost:4000/administrador/usuario/modificar/:idusuario
+router.post('/usuario/modificar/:idusuario',adminControllers.eliminarUser)
+
+// http://localhost:4000/administrador/usuario/modificar/docente/:idprofesor
+router.post('/usuario/modificar/docente/:idprofesor',adminControllers.eliminarDocente)
+
+// http://localhost:4000/administrador/usuario/modificar/alumno/:idalumno
+router.post('/usuario/modificar/alumno/:idalumno',adminControllers.eliminarAlumno)
+
 module.exports = router;

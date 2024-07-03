@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('analytics').classList.add('active');
     } else if (currentURL === '/message') {
         document.getElementById('message').classList.add('active');
-    } else if (currentURL === '/team') {
+    } else if (currentURL === '/administrador/usuario/modificar') {
         document.getElementById('team').classList.add('active');
     }
 

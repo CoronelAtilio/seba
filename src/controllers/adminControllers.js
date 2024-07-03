@@ -284,5 +284,88 @@ module.exports = {
             console.error("Error al crear el alumno y tutor:", error);
             res.status(500).send('Ocurrió un error al crear el alumno y tutor.');
         }
+    },
+    modificarUser: async (req, res) => {
+        try {
+            let alumnos = await db.Alumno.findAll()
+            let profesores =  await db.Profesor.findAll()
+            let usuarios = await db.Usuario.findAll()
+            res.render('admin/modificar/modificar',{alumnos,profesores,usuarios})
+        } catch (error) {
+            console.error("Error modificar:", error);
+            res.status(500).send('Ocurrió un error.');
+        }
+    },
+    eliminarUser: async (req, res) => {
+        try {
+            let idusuario = req.params.idusuario
+            await db.Usuario.destroy({
+                where: {
+                    idusuario
+                }
+            })
+            res.redirect('/administrador/usuario/modificar')
+        } catch (error) {
+            console.error("Error :", error);
+            res.status(500).send('Ocurrió un error.');
+        }
+    },
+    eliminarDocente: async (req, res) => {
+        try {
+            let idprofesor = req.params.idprofesor
+            // Busca el registro del profesor
+    let profesor = await db.Profesor.findByPk(idprofesor);
+
+            if (profesor) {
+                // Elimina todas las referencias en la tabla profesores_materias
+                await db.Profesor_Materia.destroy({
+                    where: { fk_idprofesor_profesormateria: idprofesor }
+                });
+        
+                // Elimina todas las referencias en la tabla usuarios
+                await db.Usuario.destroy({
+                    where: { fk_idprofesor_usuario: idprofesor }
+                });
+        
+                // Elimina el profesor
+                await db.Profesor.destroy({
+                    where: { idprofesor }
+                });
+        
+            } 
+            res.redirect('/administrador/usuario/modificar')
+        } catch (error) {
+            console.error("Error :", error);
+            res.status(500).send('Ocurrió un error.');
+        }
+    },
+    eliminarAlumno: async (req, res) => {
+        try {
+            let idalumno = req.params.idalumno
+            // Busca el registro del profesor
+    let alumno = await db.Alumno.findByPk(idalumno);
+
+            if (alumno) {
+                // // Elimina todas las referencias en la tabla profesores_materias
+                // await db.Profesor_Materia.destroy({
+                //     where: { fk_idprofesor_profesormateria: idprofesor }
+                // });
+        
+                // // Elimina todas las referencias en la tabla usuarios
+                // await db.Usuario.destroy({
+                //     where: { fk_idprofesor_usuario: idprofesor }
+                // });
+        
+                // Elimina el alumno
+                await db.Alumno.destroy({
+                    where: { idalumno }
+                });
+        
+            } 
+            res.redirect('/administrador/usuario/modificar')
+        } catch (error) {
+            console.error("Error :", error);
+            res.status(500).send('Ocurrió un error.');
+        }
     }
 }

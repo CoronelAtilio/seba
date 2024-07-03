@@ -435,20 +435,26 @@ body {
 }
 #content main .table-data .order table tr td .status {
 	font-size: 10px;
-	padding: 6px 16px;
+	/* padding: 4px 6px; */
 	color: var(--light);
 	border-radius: 20px;
 	font-weight: 700;
+	width: 30px;
+	height: 30px;
 }
 #content main .table-data .order table tr td .status.completed {
 	background: var(--blue);
+	font-size: 20px;
 }
 #content main .table-data .order table tr td .status.process {
 	background: var(--yellow);
+	font-size: 20px;
 }
 #content main .table-data .order table tr td .status.pending {
 	background: var(--orange);
+	font-size: 20px;
 }
+
 
 
 #content main .table-data .todo {
