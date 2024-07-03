@@ -29,6 +29,16 @@ router.post('/usuario/alumno',alu_tutValidationMiddleware,adminControllers.crear
 // http://localhost:4000/administrador/usuario/modificar
 router.get('/usuario/modificar',adminControllers.modificarUser)
 
+//Modificar individual
+// http://localhost:4000/administrador/usuario/modificar/:idusuario
+router.get('/usuario/modificar/:idusuario',adminControllers.modificarUserOne)
+
+// http://localhost:4000/administrador/usuario/modificar/docente/:idprofesor
+router.get('/usuario/modificar/docente/:idprofesor',adminControllers.modificarDocenteOne)
+
+// http://localhost:4000/administrador/usuario/modificar/alumno/:idalumno
+router.get('/usuario/modificar/alumno/:idalumno',adminControllers.modificarAlumnoOne)
+
 
 //Eliminar
 // http://localhost:4000/administrador/usuario/modificar/:idusuario

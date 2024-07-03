@@ -367,5 +367,38 @@ module.exports = {
             console.error("Error :", error);
             res.status(500).send('Ocurrió un error.');
         }
+    },
+    modificarUserOne: async (req, res) => {
+        try {
+            let idusuario = req.params.idusuario
+            let usuario = await db.Usuario.findByPk(idusuario)
+
+            res.render('admin/modificar/modificarUsuario',{usuario})
+        } catch (error) {
+            console.error("Error modificar:", error);
+            res.status(500).send('Ocurrió un error.');
+        }
+    },
+    modificarDocenteOne: async (req, res) => {
+        try {
+            let idprofesor = req.params.idprofesor
+            let docente = await db.Profesor.findByPk(idprofesor)
+
+            res.render('admin/modificar/modificarDocente',{docente})
+        } catch (error) {
+            console.error("Error modificar:", error);
+            res.status(500).send('Ocurrió un error.');
+        }
+    },
+    modificarAlumnoOne: async (req, res) => {
+        try {
+            let idalumno = req.params.idalumno
+            let alumno = await db.Alumno.findByPk(idalumno)
+
+            res.render('admin/modificar/modificarAlumno',{alumno})
+        } catch (error) {
+            console.error("Error modificar:", error);
+            res.status(500).send('Ocurrió un error.');
+        }
     }
 }
